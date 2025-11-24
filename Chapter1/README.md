@@ -127,19 +127,19 @@ $$
 
 We define a paired comparison:
 
-```markdown
+
 $$
 P_{i,j} = \big(r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}}\big)
 $$
-```
+
 
 Total pairs:
 
-```markdown
+
 $$
 |\mathcal{P}| = 5 \times 192 = 960
 $$
-```
+
 
 ---
 
