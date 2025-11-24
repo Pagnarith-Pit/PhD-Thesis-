@@ -25,236 +25,259 @@ With "Guidance" being guided by instructions in mind, it is a natural hypothesis
 
 # Experimental Setup and Methods
 
+This document describes the experimental setup and methodology for evaluating whether improving a model's **Instruction-Following (IF)** ability leads to improved **Guidance** in AI tutoring.
+
+---
+
 ## 1. Overview
 
-This study evaluates whether improving a model’s **Instruction-Following (IF)** ability leads to improved **Guidance** in AI tutoring. The pipeline includes two phases:
+The study consists of two phases:
 
-1. **Phase 1 — IF Enhancement:**
-   Train five base language models and five IF-enhanced versions on instruction-following datasets and evaluate IF improvement.
+1. **Phase 1 — IF Enhancement**
+   Train five base language models and five IF-enhanced variants on instruction-following datasets and verify improvements.
 
-2. **Phase 2 — Guidance Evaluation:**
-   For each tutoring input, generate controlled response pairs from both versions of each model and evaluate them using both LLM-as-judge and human annotations.
+2. **Phase 2 — Guidance Evaluation**
+   For each tutoring input, generate **paired responses** from both versions of each model. Evaluate the pairs using **LLM-as-judge** and **human annotations**.
 
 ---
 
 ## 2. Phase 1: Improving Instruction Following
 
-Let:
+Let
 
-[
-\mathcal{M}={M_1,\ldots,M_5}
-]
+```markdown
+$$
+\mathcal{M} = \{ M_1, M_2, M_3, M_4, M_5 \}
+$$
+```
 
-be the set of five base models, and let:
+be the set of five base models. For each model $M_i$, we define an instruction-following–enhanced variant:
 
-[
+```markdown
+$$
 M_i^{\text{IF}}
-]
+$$
+```
 
-denote the instruction-following–enhanced variant of model (M_i).
+Each model therefore has two versions:
+
+* Base model: $M_i$
+* IF-enhanced model: $M_i^{\text{IF}}$
+
+---
 
 ### 2.1 Instruction-Following Training
 
-Each (M_i^{\text{IF}}) is trained using:
+Each $M_i^{\text{IF}}$ is trained with:
 
-* An instruction-following dataset: (\mathcal{D}_{\text{IF}})
-* Chain-of-thought augmentation
+* Instruction-following dataset: $\mathcal{D}_{\text{IF}}$
+* Chain-of-thought (CoT) augmentation
 * Step-adherence reinforcement signals (if applicable)
+
+---
 
 ### 2.2 Instruction-Following Evaluation
 
-We evaluate IF capability using a benchmark (\mathcal{B}_{\text{IF}}) with scoring function (f):
+We evaluate IF performance using a benchmark $\mathcal{B}_{\text{IF}}$:
 
-[
-\mathrm{IFScore}(M) = \frac{1}{|\mathcal{B}*{\text{IF}}|} \sum*{x \in \mathcal{B}_{\text{IF}}} f(M(x), y_x)
-]
+```markdown
+$$
+\mathrm{IFScore}(M) = \frac{1}{|\mathcal{B}_{\text{IF}}|} \sum_{x \in \mathcal{B}_{\text{IF}}} f(M(x), y_x)
+$$
+```
 
 where:
 
-* (y_x) is the gold instruction output
-* (f) checks constraint satisfaction or correctness
+* $y_x$ = gold instruction output for input $x$
+* $f(\cdot)$ = scoring function (e.g., exact match, constraint satisfaction, or LLM-judge score)
 
-A model improves IF if:
+A model is considered improved if:
 
-[
+```markdown
+$$
 \mathrm{IFScore}(M_i^{\text{IF}}) > \mathrm{IFScore}(M_i)
-]
+$$
+```
 
 ---
 
 ## 3. Phase 2: Evaluating Tutoring Guidance
 
-We use 192 tutoring inputs from:
+We use **192 tutoring dialogue prompts** from:
 
 * **BRIDGE** (strategy-driven tutoring prompts)
 * **Unifying AI Tutor Evaluation (BEA 2025)**
 
-Let the tutoring set be:
+Let the tutoring dataset be:
 
-[
-\mathcal{D}*{\text{tutor}} = {d_1,\ldots,d*{192}}
-]
+```markdown
+$$
+\mathcal{D}_{\text{tutor}} = \{d_1, \dots, d_{192}\}
+$$
+```
 
 ### 3.1 Response Pair Generation
 
-For each input (d_j), we generate:
+For each dialogue $d_j$, each model generates two responses:
 
-[
-r_{i,j} = M_i(d_j), \qquad r^{\text{IF}}_{i,j} = M_i^{\text{IF}}(d_j)
-]
+```markdown
+$$
+r_{i,j}^{\text{base}} = M_i(d_j), \qquad
+r_{i,j}^{\text{IF}} = M_i^{\text{IF}}(d_j)
+$$
+```
 
-The pair for model (i) and input (j) is:
+We define a paired comparison:
 
-[
-p_{i,j} = (r_{i,j}, r^{\text{IF}}_{i,j})
-]
+```markdown
+$$
+P_{i,j} = \big(r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}}\big)
+$$
+```
 
 Total pairs:
 
-[
+```markdown
+$$
 |\mathcal{P}| = 5 \times 192 = 960
-]
+$$
+```
 
 ---
 
 ## 4. LLM-as-Judge Evaluation
 
-Each pair is evaluated by an LLM-judge (J):
+For each pair $P_{i,j}$, an LLM judge $J$ outputs:
 
-[
-\mathrm{LLMPreference}(p_{i,j}) \in {0, 1}
-]
+```markdown
+$$
+\mathrm{LLMPreference}(P_{i,j}) \in \{0, 1\}
+$$
+```
 
-* **1 = IF-enhanced response preferred**
-* **0 = base model preferred**
+* 1 → IF-enhanced response preferred
+* 0 → base response preferred
 
-Model-level preference score:
+Model-level LLM preference:
 
-[
-\mathrm{LLMScore}(M_i) = \frac{1}{192}\sum_{j=1}^{192} \mathrm{LLMPreference}(p_{i,j})
-]
+```markdown
+$$
+\mathrm{LLMScore}(M_i) = \frac{1}{192} \sum_{j=1}^{192} \mathrm{LLMPreference}(P_{i,j})
+$$
+```
 
 ---
 
-## 5. Human Evaluation (with Stratified Sampling)
+## 5. Human Evaluation with Stratified Sampling
 
-Because human annotation is costly, we sample:
+We sample **100 pairs per model**, giving a total of **500 pairs** for human annotation:
 
-* **100 response pairs per model**
-* **500 pairs total**
+```markdown
+$$
+\mathcal{P}_{\text{human}} = \bigcup_{i=1}^{5} \mathcal{P}_i^{\text{sample}}, \quad |\mathcal{P}_i^{\text{sample}}| = 100
+$$
+```
 
-Let:
+### 5.1 Stratified Sampling Goals
 
-[
-|\mathcal{P}_{i}^{\text{sample}}| = 100
-]
+The human evaluation ensures:
 
-and:
+1. **No annotator sees the same pair twice**
+2. **No annotator sees pairs from only one model**
+3. **Equal representation of all models across annotators**
+4. **Each pair is annotated by 3 independent annotators**
 
-[
-|\mathcal{P}_{\text{human}}| = 500
-]
+---
 
-### 5.1 Goals of the Stratified Strategy
-
-The sampling must enforce:
-
-* **(A) No annotator sees the same pair twice**
-* **(B) No annotator sees pairs from only one model**
-* **(C) Each model contributes equally to the evaluation**
-* **(D) Each pair receives 3 independent judgments**
-
-### 5.2 Annotator Setup
+### 5.2 Annotator Allocation
 
 Let:
 
-* (A={a_1,\ldots,a_{15}}) = 15 annotators
-* Each annotator labels (K = 100) pairs
-* Each pair is labeled by (R = 3) annotators
+* $A = { a_1, \dots, a_{15} }$ = annotators
+* Each annotator labels $K = 100$ pairs
+* Each pair is annotated by $R = 3$ annotators
 
-### 5.3 Constraint: No Annotator Sees Both Sides Separately
+For annotator $a_k$, the batch:
 
-Annotators always evaluate the *pair*, meaning:
+```markdown
+$$
+B_k = \{ P_{i,j} \}_{100}
+$$
+```
 
-[
-(r_{i,j}, r^{\text{IF}}_{i,j})
-]
+satisfies:
 
-is shown together as one unit.
-Annotators **never** see a response individually in other contexts.
+```markdown
+$$
+|\mathcal{P}_i \cap B_k| \approx \frac{K}{5} = 20
+$$
+```
 
-### 5.4 Equal Exposure Across Models
+---
 
-Let:
+### 5.3 Pair-Level Constraints
 
-[
-\mathcal{P}^{(a_k)} = \text{pairs given to annotator } a_k
-]
+1. **No annotator sees both sides separately**:
 
-Each annotator receives a balanced subset:
+```markdown
+$$
+A(P_{i,j}) \in \{ r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}} \}
+$$
+```
 
-[
-|\mathcal{P}_{i}^{(a_k)}| \approx \frac{K}{5} = 20
-]
+2. **Each pair has exactly 3 independent annotations**:
 
-Thus every annotator sees a mix of all 5 model families.
-
-### 5.5 Redundant Coverage (3× per pair)
-
-Each pair is annotated by **exactly 3 annotators**:
-
-[
-|{ a_k : p \in \mathcal{P}^{(a_k)} }| = 3
-]
-
-Additionally, no two annotators receive identical sets:
-
-[
-\mathcal{P}^{(a_m)} \cap \mathcal{P}^{(a_n)} \neq \mathcal{P}^{(a_m)}
-]
-
-This prevents correlated bias.
+```markdown
+$$
+|\{ a_k : P_{i,j} \in B_k \}| = 3
+$$
+```
 
 ---
 
 ## 6. Human Preference Score
 
-A pair-level human decision:
+For each pair $P_{i,j}$:
 
-[
-h(p) =
+```markdown
+$$
+h(P_{i,j}) =
 \begin{cases}
-1 & \text{IF-enhanced preferred} \
+1 & \text{IF-enhanced preferred} \\
 0 & \text{otherwise}
 \end{cases}
-]
+$$
+```
 
-Model-level human preference score:
+Model-level human preference:
 
-[
-\mathrm{HumanScore}(M_i) =
-\frac{1}{|\mathcal{P}*{i}^{\text{sample}}|}
-\sum*{p\in\mathcal{P}_{i}^{\text{sample}}} h(p)
-]
+```markdown
+$$
+\mathrm{HumanScore}(M_i) = \frac{1}{|\mathcal{P}_i^{\text{sample}}|} \sum_{P \in \mathcal{P}_i^{\text{sample}}} h(P)
+$$
+```
 
-We compute inter-rater agreement (e.g., Fleiss’ κ) across the 3 judgments for each pair.
+Inter-rater agreement is computed using Fleiss’ κ.
 
 ---
 
 ## 7. Outcome Interpretation
 
-A model exhibits improved **Guidance** if both:
+A model demonstrates improved **Guidance** if:
 
-[
+```markdown
+$$
 \mathrm{LLMScore}(M_i^{\text{IF}}) > \mathrm{LLMScore}(M_i)
-]
+$$
+```
 
 and
 
-[
+```markdown
+$$
 \mathrm{HumanScore}(M_i^{\text{IF}}) > \mathrm{HumanScore}(M_i)
-]
+$$
+```
 
-across multiple models (i).
-
+for multiple models $i = 1 \dots 5$.
 
