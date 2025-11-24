@@ -52,11 +52,11 @@ $$
 
 be the set of five base models. For each model $M_i$, we define an instruction-following–enhanced variant:
 
-```markdown
+
 $$
 M_i^{\text{IF}}
 $$
-```
+
 
 Each model therefore has two versions:
 
@@ -79,11 +79,11 @@ Each $M_i^{\text{IF}}$ is trained with:
 
 We evaluate IF performance using a benchmark $\mathcal{B}_{\text{IF}}$:
 
-```markdown
+
 $$
 \mathrm{IFScore}(M) = \frac{1}{|\mathcal{B}_{\text{IF}}|} \sum_{x \in \mathcal{B}_{\text{IF}}} f(M(x), y_x)
 $$
-```
+
 
 where:
 
@@ -92,11 +92,10 @@ where:
 
 A model is considered improved if:
 
-```markdown
 $$
 \mathrm{IFScore}(M_i^{\text{IF}}) > \mathrm{IFScore}(M_i)
 $$
-```
+
 
 ---
 
@@ -109,22 +108,22 @@ We use **192 tutoring dialogue prompts** from:
 
 Let the tutoring dataset be:
 
-```markdown
+
 $$
 \mathcal{D}_{\text{tutor}} = \{d_1, \dots, d_{192}\}
 $$
-```
+
 
 ### 3.1 Response Pair Generation
 
 For each dialogue $d_j$, each model generates two responses:
 
-```markdown
+
 $$
 r_{i,j}^{\text{base}} = M_i(d_j), \qquad
 r_{i,j}^{\text{IF}} = M_i^{\text{IF}}(d_j)
 $$
-```
+
 
 We define a paired comparison:
 
@@ -148,22 +147,22 @@ $$
 
 For each pair $P_{i,j}$, an LLM judge $J$ outputs:
 
-```markdown
+
 $$
 \mathrm{LLMPreference}(P_{i,j}) \in \{0, 1\}
 $$
-```
+
 
 * 1 → IF-enhanced response preferred
 * 0 → base response preferred
 
 Model-level LLM preference:
 
-```markdown
+
 $$
 \mathrm{LLMScore}(M_i) = \frac{1}{192} \sum_{j=1}^{192} \mathrm{LLMPreference}(P_{i,j})
 $$
-```
+
 
 ---
 
@@ -171,11 +170,11 @@ $$
 
 We sample **100 pairs per model**, giving a total of **500 pairs** for human annotation:
 
-```markdown
+
 $$
 \mathcal{P}_{\text{human}} = \bigcup_{i=1}^{5} \mathcal{P}_i^{\text{sample}}, \quad |\mathcal{P}_i^{\text{sample}}| = 100
 $$
-```
+
 
 ### 5.1 Stratified Sampling Goals
 
@@ -198,19 +197,19 @@ Let:
 
 For annotator $a_k$, the batch:
 
-```markdown
+
 $$
 B_k = \{ P_{i,j} \}_{100}
 $$
-```
+
 
 satisfies:
 
-```markdown
+
 $$
 |\mathcal{P}_i \cap B_k| \approx \frac{K}{5} = 20
 $$
-```
+
 
 ---
 
@@ -218,19 +217,19 @@ $$
 
 1. **No annotator sees both sides separately**:
 
-```markdown
+
 $$
 A(P_{i,j}) \in \{ r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}} \}
 $$
-```
+
 
 2. **Each pair has exactly 3 independent annotations**:
 
-```markdown
+
 $$
 |\{ a_k : P_{i,j} \in B_k \}| = 3
 $$
-```
+
 
 ---
 
@@ -238,7 +237,7 @@ $$
 
 For each pair $P_{i,j}$:
 
-```markdown
+
 $$
 h(P_{i,j}) =
 \begin{cases}
@@ -246,15 +245,15 @@ h(P_{i,j}) =
 0 & \text{otherwise}
 \end{cases}
 $$
-```
+
 
 Model-level human preference:
 
-```markdown
+
 $$
 \mathrm{HumanScore}(M_i) = \frac{1}{|\mathcal{P}_i^{\text{sample}}|} \sum_{P \in \mathcal{P}_i^{\text{sample}}} h(P)
 $$
-```
+
 
 Inter-rater agreement is computed using Fleiss’ κ.
 
@@ -264,19 +263,18 @@ Inter-rater agreement is computed using Fleiss’ κ.
 
 A model demonstrates improved **Guidance** if:
 
-```markdown
 $$
 \mathrm{LLMScore}(M_i^{\text{IF}}) > \mathrm{LLMScore}(M_i)
 $$
-```
+
 
 and
 
-```markdown
+
 $$
 \mathrm{HumanScore}(M_i^{\text{IF}}) > \mathrm{HumanScore}(M_i)
 $$
-```
+
 
 for multiple models $i = 1 \dots 5$.
 
