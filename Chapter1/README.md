@@ -22,37 +22,6 @@ With "Guidance" being guided by instructions in mind, it is a natural hypothesis
 1) Experiment on methods that would help enhance instruction following
 2) Test that on a tutoring dataset, to see that given the exact same input and the same model, the one that has its IF capabilities enhanced would provide superior guidance
 
-## Experimental Setup
-### Step 1: Improving IF
-* We will experiment on 5 models: ranging from large to small model
-* REQUIRED: what dataset will we use, and what evaluation do we need to test for IF?
-
-### Step 2: Testing to guage Guidance improvement
-* Same inputs for all 5 models 
--> Prompts will be drawn from BRIDGE paper: https://aclanthology.org/2024.naacl-long.120/
--> Datasets will be the Unifying AI Tutor Eval: https://github.com/kaushal0494/UnifyingAITutorEvaluation/tree/main/BEA_Shared_Task_2025_Datasets with 192 dialogues
-
-For each of the dialogue, each model will produce one response, using the strategy identified in the BRIDGE paper
-
-* Evaluation:
-1) MT Bench or similar setup using LLM as a Judge
-2) To avoid bias, we then sample at random for human annotation
--> Sample 100 of response pairs from each model, totalling 500 samples
--> Recruit student annotators, each student is responsible for annotating which they prefer on 100 samples
--> To have at least 3 annotators, for aggreeemnt analysis, each response is sampled 3 times across the 15 different students
-
-### Methods:
-1) Given one instance of input, feed that to two models (same base model, one is with IF enhanced, one doesn't)
-2) The output is a sample pair, with identical inputs, but two different responses
-
-We then create a set of dialogue pairs to be judged (C_h + base model, C_h + IF_enhanced)
-
-Here is the **clean, GitHub-ready markdown version** of your *Experimental Setup & Methods* section.
-All formulas are rendered in markdown/LaTeX (GitHub supports inline and block math via MathJax).
-
-You can paste this **directly into README.md**.
-
----
 
 # Experimental Setup and Methods
 
