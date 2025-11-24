@@ -45,11 +45,10 @@ The study consists of two phases:
 
 Let
 
-```markdown
 $$
 \mathcal{M} = \{ M_1, M_2, M_3, M_4, M_5 \}
 $$
-```
+
 
 be the set of five base models. For each model $M_i$, we define an instruction-following–enhanced variant:
 
