@@ -1,1 +1,1 @@
-Chapter 1: Improving the Guidance Capabilities of AI Tutor
+Chapter 3: Keeping This Open
