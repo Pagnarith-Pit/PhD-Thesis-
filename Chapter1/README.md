@@ -144,6 +144,8 @@ $$
 ---
 
 ## 4. LLM-as-Judge Evaluation
+**The test must be run twice, with each pair in reverse order to prevent positional bias, keeping only samples that is consistent**
+**That is, only keep sample if A is better than B, when a judge moodel is shown Instruction + A,B vs Instruction + B,A**
 
 For each pair $P_{i,j}$, an LLM judge $J$ outputs:
 
@@ -184,6 +186,7 @@ The human evaluation ensures:
 2. **No annotator sees pairs from only one model**
 3. **Equal representation of all models across annotators**
 4. **Each pair is annotated by 3 independent annotators**
+5. **Each pair must be seen in a reverse order by at least one annotator to account for positional bias**
 
 ---
 
@@ -230,6 +233,87 @@ $$
 |\{ a_k : P_{i,j} \in B_k \}| = 3
 $$
 
+---
+
+### 5.4 Statistical Significane Test
+We assess whether the LLM-as-judge reliably predicts human preferences.
+
+Let \( \mathcal{P}_i^{\text{sample}} \) be the 100 sampled pairs for model \(M_i\), and let the reverse-order consistency filter yield the subset \(\mathcal{P}_i^{\text{cons}} \subseteq \mathcal{P}_i^{\text{sample}}\).
+
+For each pair \(P_{i,j} \in \mathcal{P}_i^{\text{cons}}\), define:
+
+$$
+J(P_{i,j}) = \begin{cases}
+1 & \text{LLM judge prefers IF-enhanced} \\
+0 & \text{LLM judge prefers base}
+\end{cases}
+\quad\text{and}\quad
+h(P_{i,j}) = \begin{cases}
+1 & \text{humans prefer IF-enhanced} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+Define agreement indicator and error types:
+
+$$
+A(P_{i,j}) = \mathbb{1}\{ J(P_{i,j}) = h(P_{i,j}) \}, \quad
+E^+(P_{i,j}) = \mathbb{1}\{ J=1,\ h=0 \}, \quad
+E^-(P_{i,j}) = \mathbb{1}\{ J=0,\ h=1 \}.
+$$
+
+Aggregate over \(\mathcal{P}_i^{\text{cons}}\):
+
+$$
+N_i = |\mathcal{P}_i^{\text{cons}}|, \quad
+C_i = \sum_{P \in \mathcal{P}_i^{\text{cons}}} A(P), \quad
+n_{01}^i = \sum_{P} E^-(P), \quad
+n_{10}^i = \sum_{P} E^+(P).
+$$
+
+Judge accuracy and confidence interval:
+
+$$
+\widehat{\mathrm{Acc}}_i = \frac{C_i}{N_i}, \quad
+\mathrm{CI}_{95\%}(\mathrm{Acc}_i) \approx \widehat{\mathrm{Acc}}_i \pm 1.96\, \sqrt{\frac{\widehat{\mathrm{Acc}}_i (1-\widehat{\mathrm{Acc}}_i)}{N_i}}.
+$$
+
+Hypothesis test of predictive validity (binomial test):
+
+$$
+H_0: \mathrm{Acc}_i = 0.5 \quad \text{vs} \quad H_1: \mathrm{Acc}_i > 0.5.
+$$
+
+Compute one-sided p-value:
+
+$$
+\text{p}_i = \sum_{k=C_i}^{N_i} \binom{N_i}{k} (0.5)^k (0.5)^{N_i-k}.
+$$
+
+Positional-bias–robust test (McNemar’s test on discordant pairs):
+
+$$
+H_0: \mathbb{P}(J=1, h=0) = \mathbb{P}(J=0, h=1) \quad \text{vs} \quad H_1: \text{not equal}.
+$$
+
+Test statistic (continuity-corrected):
+
+$$
+\chi^2_i = \frac{\big(|n_{10}^i - n_{01}^i| - 1\big)^2}{n_{10}^i + n_{01}^i}, \quad \text{p}_i^{\text{Mc}} = \mathbb{P}(\chi^2_{1} \ge \chi^2_i).
+$$
+
+We conclude the LLM-as-judge is predictive for \(M_i\) if either:
+
+- \(\text{p}_i < 0.05\) and \(\widehat{\mathrm{Acc}}_i > 0.5\), or
+- \(\text{p}_i^{\text{Mc}} < 0.05\) with \(n_{10}^i < n_{01}^i\) (LLM under-calls IF less than over-calls base).
+
+Report per-model and pooled results (e.g., Fisher’s method):
+
+$$
+\chi^2_{\text{Fisher}} = -2 \sum_{i=1}^{5} \ln(\text{p}_i), \quad \chi^2_{\text{Fisher}} \sim \chi^2_{2\times5}.
+$$
+
+Sensitivity: repeat analyses with \(\mathcal{P}_i^{\text{cons}}\) thresholds (e.g., min consistency rate) and majority-vote vs. unanimous human labels.
 
 ---
 
@@ -257,6 +341,40 @@ $$
 
 Inter-rater agreement is computed using Fleiss’ κ.
 
+\textbf{Fleiss' κ for binary preference (R = 3 raters).}
+We have C = 2 categories: IF-enhanced (1) and base (0). For each pair (item) j,
+let n_{j,1} be the number of raters who chose 1, and n_{j,0} = R - n_{j,1}.
+
+Construct the item-by-category count matrix N = [n_{j,c}] for j = 1..J and c ∈ {0,1} where J = |\mathcal{P}_{\text{human}}| (500 pairs).
+
+Category proportions across all items:
+$$
+p_c = \frac{1}{J R} \sum_{j=1}^{J} n_{j,c}, \quad c \in \{0,1\}, \quad \sum_{c} p_c = 1.
+$$
+
+Item-wise agreement:
+$$
+P_j = \frac{1}{R(R-1)} \sum_{c \in \{0,1\}} n_{j,c}(n_{j,c} - 1).
+$$
+
+Mean observed agreement:
+$$
+\bar{P} = \frac{1}{J} \sum_{j=1}^{J} P_j.
+$$
+
+Expected agreement under random rating with fixed category proportions:
+$$
+\bar{P}_e = \sum_{c \in \{0,1\}} p_c^2.
+$$
+
+Fleiss' kappa:
+$$
+\kappa = \frac{\bar{P} - \bar{P}_e}{1 - \bar{P}_e}.
+$$
+
+Optional: report per-model κ by restricting J to items in \mathcal{P}_i^{\text{sample}}.
+Also report bootstrap CIs by resampling items j and recomputing κ.
+
 ---
 
 ## 7. Outcome Interpretation
@@ -278,3 +396,17 @@ $$
 
 for multiple models $i = 1 \dots 5$.
 
+---
+
+### 8. Bayeian Sampling For Effect Estimation
+If the model's output agrees with human rater's outputs (i.e., 5.4 is statistically significant):
+- replace the 500 samples of the bot with ground label, keep the rest synthetic
+If not:
+- only use the 500 samples obtained from the human raters
+
+Implement Bradley-Terry Model on the ranked sample:
+- Using Non-conjugate prior distribution N~(0,1)
+- Using 4000 simulations with Hamiltonian Monte Carlo sampling
+- using NUTS (No-U-Turn Sampler) algorithm
+
+Key goal: generate an alpha that is the latent parameter predicting whether the enhanced-IF AI utor is more preferred than the base AI tutor
