@@ -339,30 +339,33 @@ $$
 $$
 
 
-Inter-rater agreement is computed using Fleiss’ κ.
+Inter-rater agreement (R = 3 raters) is computed using Fleiss’ κ.
 
-\textbf{Fleiss' κ for binary preference (R = 3 raters).}
 We have C = 2 categories: IF-enhanced (1) and base (0). For each pair (item) j,
-let n_{j,1} be the number of raters who chose 1, and n_{j,0} = R - n_{j,1}.
+let $n_{j,1}$ be the number of raters who chose 1, and $n_{j,0}$ = R - $n_{j,1}$.
 
-Construct the item-by-category count matrix N = [n_{j,c}] for j = 1..J and c ∈ {0,1} where J = |\mathcal{P}_{\text{human}}| (500 pairs).
+Construct the item-by-category count matrix $N = [n_{j,c}]$ for j = 1..J and c ∈ {0,1} where $J = |\mathcal{P}_{\text{human}}|$ (500 pairs).
 
 Category proportions across all items:
+
 $$
 p_c = \frac{1}{J R} \sum_{j=1}^{J} n_{j,c}, \quad c \in \{0,1\}, \quad \sum_{c} p_c = 1.
 $$
 
 Item-wise agreement:
+
 $$
 P_j = \frac{1}{R(R-1)} \sum_{c \in \{0,1\}} n_{j,c}(n_{j,c} - 1).
 $$
 
 Mean observed agreement:
+
 $$
 \bar{P} = \frac{1}{J} \sum_{j=1}^{J} P_j.
 $$
 
 Expected agreement under random rating with fixed category proportions:
+
 $$
 \bar{P}_e = \sum_{c \in \{0,1\}} p_c^2.
 $$
