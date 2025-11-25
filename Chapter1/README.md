@@ -368,6 +368,7 @@ $$
 $$
 
 Fleiss' kappa:
+
 $$
 \kappa = \frac{\bar{P} - \bar{P}_e}{1 - \bar{P}_e}.
 $$
