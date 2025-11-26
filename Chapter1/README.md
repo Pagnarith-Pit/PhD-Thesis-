@@ -306,7 +306,7 @@ Also report bootstrap CIs by resampling items j and recomputing κ.
 
 1) B# What to compute
 
-For each pair (P \in \mathcal{P}_i^{\text{cons}}):
+For each pair $P \in \mathcal{P}_i^{\text{cons}}$:
 
 $$
 J(P)\in{0,1}\quad\text{: LLM judge choice (1 if LLM prefers IF-enhanced; 0 if LLM prefers Base).}
