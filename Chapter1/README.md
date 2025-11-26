@@ -319,19 +319,19 @@ $$
 Aggregate (for model (i)):
 
 $$
-C_i ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=h(P)}
+C_i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=h(P)}
 $$
 
 $$
-N_i ;=; \lvert \mathcal{P}_i^{\text{cons}} \rvert
+N_i = \lvert \mathcal{P}_i^{\text{cons}} \rvert
 $$
 
 $$
-n_{10,i} ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=1,; h(P)=0}
+n_10^i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=1; h(P)=0}
 $$
 
 $$
-n_{01,i} ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=0,; h(P)=1}
+n_{01,i} = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=0; h(P)=1}
 $$
 
 * Report
