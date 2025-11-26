@@ -166,6 +166,7 @@ $$
 $$
 
 Currently, the best model might be Gemini 3, as it has LearnLM merged into it, with their paper claiming that evaluating pedagogical is easier than implementing it, suggesting a good performance. Needs to be tested on the data to confirm. That is, we rerun Gemini 3 with the Guidance Test Set (as it has ground truth label), and see which is a good judge
+
 ---
 
 ## 5. Human Evaluation with Stratified Sampling
@@ -235,88 +236,6 @@ $$
 
 ---
 
-### 5.4 Statistical Significane Test
-We assess whether the LLM-as-judge reliably predicts human preferences.
-
-Let \( \mathcal{P}_i^{\text{sample}} \) be the 100 sampled pairs for model \(M_i\), and let the reverse-order consistency filter yield the subset \(\mathcal{P}_i^{\text{cons}} \subseteq \mathcal{P}_i^{\text{sample}}\).
-
-For each pair \(P_{i,j} \in \mathcal{P}_i^{\text{cons}}\), define:
-
-$$
-J(P_{i,j}) = \begin{cases}
-1 & \text{LLM judge prefers IF-enhanced} \\
-0 & \text{LLM judge prefers base}
-\end{cases}
-\quad\text{and}\quad
-h(P_{i,j}) = \begin{cases}
-1 & \text{humans prefer IF-enhanced} \\
-0 & \text{otherwise}
-\end{cases}
-$$
-
-Define agreement indicator and error types:
-
-$$
-A(P_{i,j}) = \mathbb{1}\{ J(P_{i,j}) = h(P_{i,j}) \}, \quad
-E^+(P_{i,j}) = \mathbb{1}\{ J=1,\ h=0 \}, \quad
-E^-(P_{i,j}) = \mathbb{1}\{ J=0,\ h=1 \}.
-$$
-
-Aggregate over \(\mathcal{P}_i^{\text{cons}}\):
-
-$$
-N_i = |\mathcal{P}_i^{\text{cons}}|, \quad
-C_i = \sum_{P \in \mathcal{P}_i^{\text{cons}}} A(P), \quad
-n_{01}^i = \sum_{P} E^-(P), \quad
-n_{10}^i = \sum_{P} E^+(P).
-$$
-
-Judge accuracy and confidence interval:
-
-$$
-\widehat{\mathrm{Acc}}_i = \frac{C_i}{N_i}, \quad
-\mathrm{CI}_{95\%}(\mathrm{Acc}_i) \approx \widehat{\mathrm{Acc}}_i \pm 1.96\, \sqrt{\frac{\widehat{\mathrm{Acc}}_i (1-\widehat{\mathrm{Acc}}_i)}{N_i}}.
-$$
-
-Hypothesis test of predictive validity (binomial test):
-
-$$
-H_0: \mathrm{Acc}_i = 0.5 \quad \text{vs} \quad H_1: \mathrm{Acc}_i > 0.5.
-$$
-
-Compute one-sided p-value:
-
-$$
-\text{p}_i = \sum_{k=C_i}^{N_i} \binom{N_i}{k} (0.5)^k (0.5)^{N_i-k}.
-$$
-
-Positional-bias–robust test (McNemar’s test on discordant pairs):
-
-$$
-H_0: \mathbb{P}(J=1, h=0) = \mathbb{P}(J=0, h=1) \quad \text{vs} \quad H_1: \text{not equal}.
-$$
-
-Test statistic (continuity-corrected):
-
-$$
-\chi^2_i = \frac{\big(|n_{10}^i - n_{01}^i| - 1\big)^2}{n_{10}^i + n_{01}^i}, \quad \text{p}_i^{\text{Mc}} = \mathbb{P}(\chi^2_{1} \ge \chi^2_i).
-$$
-
-We conclude the LLM-as-judge is predictive for \(M_i\) if either:
-
-- \(\text{p}_i < 0.05\) and \(\widehat{\mathrm{Acc}}_i > 0.5\), or
-- \(\text{p}_i^{\text{Mc}} < 0.05\) with \(n_{10}^i < n_{01}^i\) (LLM under-calls IF less than over-calls base).
-
-Report per-model and pooled results (e.g., Fisher’s method):
-
-$$
-\chi^2_{\text{Fisher}} = -2 \sum_{i=1}^{5} \ln(\text{p}_i), \quad \chi^2_{\text{Fisher}} \sim \chi^2_{2\times5}.
-$$
-
-Sensitivity: repeat analyses with \(\mathcal{P}_i^{\text{cons}}\) thresholds (e.g., min consistency rate) and majority-vote vs. unanimous human labels.
-
----
-
 ## 6. Human Preference Score
 
 For each pair $P_{i,j}$:
@@ -338,6 +257,8 @@ $$
 \mathrm{HumanScore}(M_i) = \frac{1}{|\mathcal{P}_i^{\text{sample}}|} \sum_{P \in \mathcal{P}_i^{\text{sample}}} h(P)
 $$
 
+
+### Inter-rater agreement
 
 Inter-rater agreement (R = 3 raters) is computed using Fleiss’ κ.
 
@@ -378,6 +299,51 @@ $$
 
 Optional: report per-model κ by restricting J to items in \mathcal{P}_i^{\text{sample}}.
 Also report bootstrap CIs by resampling items j and recomputing κ.
+
+---
+
+### LLM Agreement
+
+1) B# What to compute
+
+For each pair (P \in \mathcal{P}_i^{\text{cons}}):
+
+$$
+J(P)\in{0,1}\quad\text{: LLM judge choice (1 if LLM prefers IF-enhanced; 0 if LLM prefers Base).}
+$$
+
+$$
+h(P)\in{0,1}\quad\text{: human majority choice (1 if humans prefer IF-enhanced).}
+$$
+
+Aggregate (for model (i)):
+
+$$
+C_i ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=h(P)}
+$$
+
+$$
+N_i ;=; \lvert \mathcal{P}_i^{\text{cons}} \rvert
+$$
+
+$$
+n_{10,i} ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=1,; h(P)=0}
+$$
+
+$$
+n_{01,i} ;=; \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1}{J(P)=0,; h(P)=1}
+$$
+
+* Report
+Table with one row per model:
+
+|    Model (i) | (N_i) | (C_i) | (n_{10,i}) | (n_{01,i}) |
+| -----------: | ----: | ----: | ---------: | ---------: |
+| `model-name` | `N_i` | `C_i` | `n_{10,i}` | `n_{01,i}` |
+|          ... |   ... |   ... |        ... |        ... |
+
+---
+
 
 ---
 
