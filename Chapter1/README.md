@@ -327,14 +327,14 @@ N_i = \lvert \mathcal{P}_i^{\text{cons}} \rvert
 $$
 
 $$
-(n_{10})^i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1} {{J(P)=1; h(P)=0}}
-(LLM says IF but humans say Base).
+(n_{10})^i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1} \{J(P)=1; h(P)=0\}
 $$
+LLM says IF but humans say Base.
 
 $$
-(n_{01})^i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1} {{J(P)=0; h(P)=1}}
-(LLM says Base but humans say IF).
+(n_{01})^i = \sum_{P\in\mathcal{P}_i^{\text{cons}}} \mathbf{1} \{J(P)=0; h(P)=1\}
 $$
+LLM says Base but humans say IF.
 
 * Report
 Table with one row per model:
