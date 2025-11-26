@@ -110,14 +110,37 @@ Let the tutoring dataset be:
 
 
 $$
-\mathcal{D}_{\text{tutor}} = \{d_1, \dots, d_{192}\}
+\mathcal{D}_{\text{TUTOR-ORIGINAL}} = \{d_1, \dots, d_{192}\}
 $$
+
+Each sample $d_i$ contains:
+* Conversation ID $I$ : unique identifier of the conversation sample
+* Conversation History $H$ : a problem to solve, plus conversations between a student and a tutor, ending with the student's turn
 
 
 ### 3.1 Response Pair Generation
 
-For each dialogue $d_j$, each model generates two responses:
+Response generation then follows the protocol laid out in **BRIDGE** 
 
+For each sample in ${D}_{\text{TUTOR-ORIGINAL}}$, given a conversation history $H$, we formalize the responses $r$ as being generated from the following computational model:
+
+$$
+r \sim p\left(r \mid c_h, \underbrace{e}_{\text{Step 1}}, \underbrace{z_{\text{what}}}_{\text{Step 2}}, \underbrace{z_{\text{why}}}_{\text{Step 2}} \right)
+$$
+
+where $e$ is the error, $z_{\text{what}}$ the strategy, and $z_{\text{why}}$ the intention. 
+
+The final response $r$ is generated using 3 steps:
+
+Step 1) Provide a prompt $prompt_{Determine-Error}$, and the conversation history $H$ to a given model to find what the student's error may be -> Finding $e$
+
+Step 2) Provide a different prompt $prompt_{Determine-Strat-Intent}$, and the conversation history $H$ to the same model to find what the best course of action is -> Finding $z_{\text{what}}$ and $z_{\text{why}}$
+
+Step 3) Provide one final prompt $prompt_{Decision-Making}$, and results from Step 1 and Step 2 \( $e$, $z_{\text{what}}$ and $z_{\text{why}}$ \) to produce the response $r$
+
+**All prompts are provided in the repo under GuidanceEval/PromptAndStrat.txt**
+
+For each dialogue $d_j$, each model generates two responses:
 
 $$
 r_{i,j}^{\text{base}} = M_i(d_j), \qquad
