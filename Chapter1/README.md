@@ -304,9 +304,9 @@ Also report bootstrap CIs by resampling items j and recomputing κ.
 
 ### LLM Agreement
 
-1) B# What to compute
+1) Basic Count for each model
 
-For each pair $P \in \mathcal{P}_i^{\text{cons}}$:
+For each pair $P \in \mathcal{P}_i^{\text{cons}}$, where $\mathcal{P}_i^{\text{cons}}$ is the consistent result of position swapping in LLM as a judge:
 
 $$
 J(P)\in{0,1}\quad\text{: LLM judge choice (1 if LLM prefers IF-enhanced; 0 if LLM prefers Base).}
@@ -343,9 +343,95 @@ Table with one row per model:
 |          ... |   ... |   ... |        ... |        ... |
 
 ---
+2) Accuracy and confidence interval (Is LLM better than chance?)
+
+Statistic
+•	Accuracy: (\widehat{\mathrm{Acc}}_i = C_i / N_i).
+CI
+•	Use Wilson 95% CI for a proportion (better than normal approx):
+[
+\text{Wilson CI: } \widehat{p}=\frac{C_i}{N_i},\quad
+\mathrm{CI}_{\text{Wilson}} = \frac{\widehat{p} + \frac{z^2}{2N_i} \pm z\sqrt{\frac{\widehat{p}(1-\widehat{p})}{N_i} + \frac{z^2}{4N_i^2}}}{1 + \frac{z^2}{N_i}},\quad z=1.96.
+]
+Hypothesis test
+•	Null (H_0:) Acc = 0.5 (random). Alternative (H_1:) Acc > 0.5.
+•	Exact one-sided binomial test (compute (P(X \ge C_i)) under (X\sim\mathrm{Binom}(N_i,0.5))):
+[
+p_i = \sum_{k=C_i}^{N_i} \binom{N_i}{k} 0.5^{N_i}.
+]
+Decision rule
+•	Declare predictive if (p_i < 0.05) and (\widehat{\mathrm{Acc}}_i > 0.5).
+What to report
+•	(\widehat{\mathrm{Acc}}_i), Wilson 95% CI, exact binomial one-sided p-value, and raw counts (C_i,N_i).
+
+--- 
+
+3) Positional-bias / asymmetry check (Is LLM systematically biased?)
+
+Why
+•	An LLM could be "biased" toward preferring IF-enhanced (or Base) even when humans don't.
+Data used
+•	Only discordant pairs where LLM and humans disagree: (n_{10}^i) and (n_{01}^i). Let (m = n_{10}^i + n_{01}^i).
+Exact McNemar (binomial) test
+•	Under (H_0), (n_{10}^i \sim \mathrm{Binom}(m, 0.5)).
+•	Two-sided exact p-value: probability of seeing an imbalance at least as extreme as observed. (Compute by summing binomial probabilities.)
+•	If (m) is large, you may report continuity-corrected McNemar chi-square:
+[
+\chi^2 = \frac{(|n_{10}-n_{01}|-1)^2}{n_{10}+n_{01}},
+]
+with 1 d.f. — but prefer the exact test when (m < 25\text{–}30).
+Discordant odds ratio
+•	(\widehat{\mathrm{OR}} = n_{10}^i / n_{01}^i). If either cell is 0, add 0.5 to both (continuity correction).
+•	Approximate 95% CI on log scale:
+[
+\log(\widehat{\mathrm{OR}}) \pm 1.96\sqrt{1/n_{10} + 1/n_{01}}.
+]
+Decision rule
+•	If exact McNemar p < 0.05 and (n_{10}^i < n_{01}^i) (i.e., LLM under-calls IF less than it over-calls Base) — you may interpret that LLM is not unfairly overcalling IF. If (n_{10} > n_{01}) and p < 0.05, that is evidence the LLM overcalls IF (bias toward IF).
+What to report
+•	(n_{10}^i, n_{01}^i, m), exact McNemar p-value, (\widehat{\mathrm{OR}}) + 95% CI. State direction (which error is larger).
+
+---
+
+4) Multiple models: pooled inference across models
+
+Why
+•	You have multiple models (M_1,\dots,M_5). You may want an overall p-value.
+Fisher’s method
+•	Combine one-sided binomial p-values ({p_i}):
+[
+\chi^2_{\text{Fisher}} = -2\sum_{i=1}^5 \ln(p_i),\quad \chi^2_{\text{Fisher}}\sim \chi^2_{10}.
+]
+•	Compute combined p-value from (\chi^2_{\text{Fisher}}).
+Caveat
+•	Fisher assumes independent p-values. If the same human labels or items are reused across models, p-values may be correlated → Fisher can be anticonservative.
+Alternative (dependence-robust)
+•	Use permutation or bootstrap across items/human labels to get an empirical pooled p-value if dependence is suspected.
+Multiple-testing control for per-model claims
+•	If you make claims per model, correct the per-model p-value threshold for 5 tests (options):
+o	Bonferroni: threshold = 0.05/5 = 0.01 (strict).
+o	Benjamini–Hochberg (FDR): if you want discovery control, apply BH at q=0.05.
+What to report
+•	For pooled test: Fisher statistic, df, combined p-value, and note independence caveat. For per-model: raw p-values and corrected p-values (Bonferroni or FDR).
 
 
 ---
+
+### Results of LLM-Human Agreement Experiments
+For each model (M_i), conclude LLM-as-judge is predictive if either:
+
+•	(A) Exact one-sided binomial p-value (p_i < 0.05) and (\widehat{\mathrm{Acc}}_i > 0.5) (report Wilson CI); or
+•	(B) McNemar’s exact test p < 0.05 and (n_{10}^i < n_{01}^i) (i.e., LLM does not systematically overcall IF).
+For overall pooled claim across models:
+•	Use Fisher’s method for a combined p-value, but explicitly state the independence caveat; if dependence is likely, present a permutation-based pooled p-value.
+
+In other words:
+•	High accuracy (e.g., 0.75) + significant binomial p → LLM matches humans well.
+•	Acc ≈ 0.5 + non-significant → LLM is no better than random.
+•	Significant McNemar with (n_{10} > n_{01}) → LLM tends to prefer IF even when humans don't (an overcall bias).
+•	Low inter-rater agreement among humans → humans disagree among themselves; be cautious interpreting LLM agreement with majority.
+
+
 
 ## 7. Outcome Interpretation
 
