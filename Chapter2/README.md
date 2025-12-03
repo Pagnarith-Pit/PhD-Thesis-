@@ -396,7 +396,7 @@ Phase 2 will use a combination of descriptive, inferential, and exploratory stat
   * $S_i$ = subgroup membership (STEM/non-STEM, coded 0/1)
   * $Y_i$ = learning outcome variables (perceived understanding, engagement, self-reported performance, etc.)
 
-Missing data will be handled via pairwise deletion or multiple imputation; scales will be standardized as needed ((\tilde x = (x-\bar x)/s_x)).
+Missing data will be handled via pairwise deletion or multiple imputation; scales will be standardized as needed $\tilde x = (x-\bar x)/s_x$.
 
 ### **1) Descriptive Statistics**
 
