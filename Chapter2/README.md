@@ -34,6 +34,8 @@ This study adopts a mixed-methods Exploratory Sequential design, integrating qua
 
 Mixed-methods research has been widely adopted in educational technology studies when the aim is to understand both the complexity of human behaviours and the general prevalence of patterns (Creswell & Plano Clark, 2017). Because generative AI is a novel and rapidly evolving tool, student usage has not yet stabilised into predictable or well-defined patterns. Consequently, qualitative inquiry is essential to uncover behaviours, use cases, and perceptions that existing theories or surveys might overlook.
 
+### Theoretical Framework
+
 Past research on AI in education has predominantly relied on frameworks such as:
 
 * Technology Acceptance Model (TAM)
