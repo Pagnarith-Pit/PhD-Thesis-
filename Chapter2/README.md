@@ -30,10 +30,6 @@ Through addressing these questions, this research aims to illuminate the real, r
 
 This study adopts a mixed-methods Exploratory Sequential design, integrating qualitative and quantitative research to develop a comprehensive understanding of how university students incorporate generative AI tools into their learning practices. The decision to employ an exploratory design reflects the emerging and understudied nature of day-to-day AI use in higher education. While substantial policy discussions and conceptual debates surround AI in learning, empirical evidence capturing how students actually use AI remains limited. Combining qualitative exploration with quantitative validation therefore enables both openness to new patterns and the ability to evaluate their generalisability across a larger population.
 
-### Justification for Exploratory Design 
-
-Mixed-methods research has been widely adopted in educational technology studies when the aim is to understand both the complexity of human behaviours and the general prevalence of patterns (Creswell & Plano Clark, 2017). Because generative AI is a novel and rapidly evolving tool, student usage has not yet stabilised into predictable or well-defined patterns. Consequently, qualitative inquiry is essential to uncover behaviours, use cases, and perceptions that existing theories or surveys might overlook.
-
 ### Theoretical Framework
 
 Past research on AI in education has predominantly relied on frameworks such as:
@@ -55,6 +51,20 @@ To address this gap, the present study draws on the Substitution, Augmentation, 
 * Enabling uses: where AI introduces fundamentally new learning opportunities or transforms how tasks are approached.
 
 SAMR is therefore uniquely suited to evaluating whether AI enhances education in a pedagogically meaningful way or merely accelerates or outsources existing tasks. This distinction is especially relevant given current debates on academic integrity, cognitive offloading, and the risk of over-reliance on AI.
+
+We explicitly use SAMR as "sensitising framework". A sensitising concept helps you notice relevant things without determining what the data must be. This means that SAMR is used to guide question creation, but then analysis are performed inductively without forcing data into a predefined model. After themes emerge, we then apply SAMR deductively for final interpreation. 
+
+### Justification for Exploratory Design 
+
+Mixed-methods research has been widely adopted in educational technology studies when the aim is to understand both the complexity of human behaviours and the general prevalence of patterns (Creswell & Plano Clark, 2017). Because generative AI is a novel and rapidly evolving tool, student usage has not yet stabilised into predictable or well-defined patterns. Consequently, qualitative inquiry is essential to uncover behaviours, use cases, and perceptions that existing theories or surveys might overlook.
+
+The two phases of this study are designed to function as an integrated exploratory–confirmatory sequence, where qualitative insights from Phase 1 directly inform and structure the quantitative investigation in Phase 2. Phase 1 generates conceptual categories of AI usage through semi-structured interviews, allowing students to describe their behaviours, strategies, and perceptions in their own words. These emergent themes are interpreted through the SAMR framework, which sensitises the analysis to distinctions between uses that enable new learning practices (Modification/Redefinition) and those that ease existing tasks (Substitution/Augmentation). This approach ensures that the qualitative exploration remains inductive, capturing the full range of student experiences, while also producing theoretically meaningful categories that can guide further measurement.
+
+Phase 2 translates these Phase 1 themes into quantifiable constructs within a large-scale survey. Each usage category identified qualitatively becomes a survey item or cluster of items, allowing measurement of its prevalence, frequency, and perceived impact across a broad and diverse student population. SAMR-aligned enabling and easing distinctions inform the coding of these survey responses, providing a consistent lens for interpreting which behaviours represent pedagogically significant transformation versus efficiency-focused convenience. By operationalising qualitative findings in this way, Phase 2 serves as a validation and generalisation step, testing whether patterns observed in the exploratory sample are evident at scale.
+
+Finally, qualitative and quantitative results are integrated through a joint inferential framework. Convergence is assessed where Phase 2 data support Phase 1 themes, demonstrating stability and generalisability of usage patterns. Complementarity is established where qualitative insights explain the mechanisms behind quantitative trends—for example, how specific enabling uses contribute to self-reported understanding or engagement. Divergence is examined where Phase 2 outcomes differ from Phase 1 expectations, highlighting areas where emergent behaviours may not translate into measurable learning outcomes. Together, this analytical integration ensures coherence across the study, linking theory, empirical observation, and interpretation, and providing a comprehensive understanding of how generative AI reshapes students’ learning practices in higher education.
+
+In the section below, we provide the design of each phase of study in more detail. 
 
 ## Qualitative Study (Phase 1)
 The initial qualitative phase aims to identify the actual ways students integrate generative AI into their everyday coursework. The objective is to generate categories of usage, explore their underlying motivations, and understand whether students experience these practices as transformative or merely convenient.
@@ -115,6 +125,39 @@ Two complementary analytical approaches will be used: sentiment analysis and the
 #### Sentiment Analysis
 
 Sentiment analysis provides a preliminary quantitative assessment of the emotional tone of participants’ discussions about AI. This is particularly useful given that self-reported attitudes may be influenced by social desirability or normative pressure in higher-education environments. Automated sentiment scoring offers a consistent and unbiased method for identifying whether students’ experiences are broadly positive, negative, or neutral. It also helps detect patterns of enthusiasm, frustration, or ambivalence that might correlate with specific uses of AI.
+
+##### **Step A: Annotate each response by usage type**
+
+* During coding, assign each participant response to a theme (e.g., “concept explanation,” “debugging,” “assignment outsourcing”) from your thematic analysis.
+* Each theme should also have its SAMR label: enabling vs easing.
+
+##### **Step B: Sentiment at the theme level**
+
+* Perform sentiment analysis on each response within a theme.
+* Then, **aggregate sentiment per theme for each participant** rather than across the entire interview.
+
+**Example:**
+
+| Participant | Theme                 | SAMR     | Sentiment Score |
+| ----------- | --------------------- | -------- | --------------- |
+| P1          | Concept Explanation   | Enabling | +0.8            |
+| P1          | Assignment Completion | Easing   | -0.1            |
+| P2          | Debugging             | Enabling | +0.5            |
+
+This keeps the affective tone tied to **specific AI usage patterns**, which is much more informative for interpretation.
+
+* With this, we can answer questions like:
+
+  * Are enabling uses associated with more positive sentiment than easing uses?
+  * Do participants express frustration when using AI for certain tasks?
+  * Does sentiment correlate with perceived learning impact?
+
+* For a visual or analytical summary, you could create heatmaps:
+
+  * X-axis: Usage type/theme
+  * Y-axis: Sentiment score
+  * Color: SAMR category (enabling/easing)
+This allows quick inspection of which tasks students enjoy or dislike and whether enabling uses are more positively experienced.
 
 
 #### Thematic Analysis
@@ -210,7 +253,6 @@ Recruitment will occur through multiple channels to ensure broad reach:
 
 Participants will receive detailed information about the study’s aims, data handling procedures, risks, and consent requirements prior to participation.
 
----
 
 ## **Study Design**
 
@@ -339,13 +381,22 @@ A small number of optional open-ended questions will capture nuance, e.g.:
 * “Describe a time AI significantly improved your learning.”
 * “Describe a time AI negatively affected your learning or engagement.”
 
----
 
 ## **Analysis Plan**
 
 Phase 2 will use a combination of descriptive, inferential, and exploratory statistical analyses:
 
----
+**Notation:**
+  * $n$ = number of participants (target $\ge 300$)
+  * $K$ = number of usage themes from Phase 1
+  * $E_{ik}$ = participant $i$'s enabling/easing score for theme $k$
+  * $E_i = \frac{1}{K} \sum_{k=1}^{K} E_{ik}$ = overall enabling/easing score
+  * $U_{ik}$ = usage frequency for theme $k$ (Likert 1–5)
+  * $P_i$ = self-rated AI proficiency (1–5)
+  * $S_i$ = subgroup membership (STEM/non-STEM, coded 0/1)
+  * $Y_i$ = learning outcome variables (perceived understanding, engagement, self-reported performance, etc.)
+
+Missing data will be handled via pairwise deletion or multiple imputation; scales will be standardized as needed ((\tilde x = (x-\bar x)/s_x)).
 
 ### **1) Descriptive Statistics**
 
@@ -373,6 +424,17 @@ If a theme from Phase 1 shows up rarely in Phase 2, discuss this as:
 
 > “A behaviour observed in qualitative data but not widely generalisable at scale.”
 
+**Inputs:** Usage frequency $U_{ik}$ (1–5)
+
+**Formula:**
+
+* Binary use indicator: $B_{ik} = \mathbf{1}(U_{ik} \ge 2)$
+* Count per theme: $n_k = \sum_{i=1}^{n} B_{ik}$
+* Prevalence proportion: $\hat p_k = n_k / n$
+* 95% CI: $\hat p_k \pm z_{0.975} \sqrt{\hat p_k (1-\hat p_k)/n}$
+
+**Outputs:** Table of counts, proportions, 95% CI; bar charts per theme
+
 ### 1.2) Frequency distributions
 
 #### **Why This Is Important**
@@ -384,6 +446,15 @@ AI usage behaviours may not be uniformly distributed. Frequency distributions al
 * Normal or near-normal patterns (uniform adoption across the student population)
 
 These insights are critical for designing targeted interventions and understanding heterogeneity within the student body.
+
+**Inputs:** $U_{ik}$
+
+**Formula:**
+$
+\Pr(U_k = r) = \frac{1}{n} \sum_{i=1}^n \mathbf{1}(U_{ik} = r), \quad r \in {1,2,3,4,5}
+$
+
+**Outputs:** Histograms, mode, median, IQR for each theme
 
 #### **How to Interpret the Results**
 
@@ -415,7 +486,22 @@ This connects directly to your main research question:
 
 > *How is AI reshaping learning practices?*
 
----
+**Inputs:** $E_i$ per participant
+
+**Formula:**
+$
+\bar E = \frac{1}{n} \sum_{i=1}^{n} E_i, \quad SE(\bar E) = s_E / \sqrt{n}
+$
+
+where
+$
+s_E = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (E_i - \bar{E})^2}
+$ 
+
+**Outputs:**
+
+* Mean, SD, SE, 95% CI: $\bar E \pm t_{n-1,0.975} SE(\bar E)$
+* Boxplots by subgroup (STEM vs non-STEM, year level, etc.)
 
 ### **2) Inferential Tests**
 
@@ -444,6 +530,13 @@ Examples:
 * If STEM students use enabling AI tools more → this supports the idea that procedural/technical domains benefit differently.
 * If international students rely more on translation → this has implications for inclusivity and language support.
 
+**Formula:**
+$
+t = \frac{\bar E_1 - \bar E_0}{\sqrt{s_1^2/n_1 + s_0^2/n_0}}
+$
+
+**Outputs:** t-value, df, p-value, Cohen’s d, 95% CI
+
 ### 2.2) Correlations between AI proficiency, usage types, and outcomes
 
 #### **Why This Is Important**
@@ -462,34 +555,40 @@ Your conceptual model assumes that factors like AI proficiency, usage style, and
 
 Correlations support your theorisation of *how AI use reshapes learning*.
 
-### 2.3) Regressions predicting learning outcomes from usage categories
+**Inputs:** $E_i, P_i, U_{ik}, Y_i$
 
-#### **Why This Is Important**
+**Formula (Pearson):**
+$
+r_{XY} = \frac{\sum_i (X_i - \bar X)(Y_i - \bar Y)}{\sqrt{\sum_i (X_i - \bar X)^2 \sum_i (Y_i - \bar Y)^2}}
+$
 
-Regression allows you to *predict* learning outcomes from:
-
-* AI usage types
-* AI proficiency
-* Demographic variables
-* Course discipline
-
-This helps establish the *relative importance* of your predictors.
-
-#### **How to Interpret the Results**
-
-* **Significant coefficients** → these factors meaningfully predict learning outcomes.
-* **Large effect sizes** → strong practical significance.
-* **Non-significant predictors** → the variable may not matter in real-world educational contexts.
-
-This shapes your final argument about what AI tools actually do for learning.
-
----
+**Outputs:** Correlation matrix, p-values, heatmaps; optionally Spearman for ordinal variables
 
 ### **3) Structural and Exploratory Analyses**
 
 ---
 
+Unlike the formulas above, in this step, we'll be using SmartPLS software for Factor Analysis and SEM modelling.
+
 ### **3.1) Factor analysis**
+
+**1) When it should be used**
+
+Treat a SAMR level (Substitution, Augmentation, Modification, Redefinition) as a latent variable only when it is represented by at least 3–4 observed usage themes.
+
+This ensures the factor is identifiable, meaning the model can reliably separate the underlying latent construct from random variation.
+
+If a SAMR level has fewer than 3 themes, it should be treated as a simple observed average of the available themes rather than latent.
+
+**2) What we are measuring**
+
+The latent SAMR construct estimates the true pedagogical impact of AI usage at that level.
+
+It captures the underlying tendency for students’ reported AI activities to align with the intended educational effect (e.g., Substitution = easing existing tasks; Redefinition = enabling new learning opportunities).
+
+This approach compensates for the fact that students may not accurately self-assess the educational significance of each activity — the latent factor aggregates across multiple themes to provide a more robust estimate of impact.
+
+So when doing factor loading, expect to see 4 factors. Then a valid Phase 1 assignment would mean that all themes assigned to Substitution loads on one factor highly and less on others. 
 
 
 #### **Why This Is Important**
@@ -540,6 +639,5 @@ Together, these analyses determine:
 * Which AI practices carry genuine educational value
 * Where risks (over-reliance, shallow learning) are concentrated
 * How different student populations interact with AI
-
 
 
