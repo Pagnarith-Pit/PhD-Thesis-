@@ -528,7 +528,7 @@ This produces a theoretically grounded explanation of student behaviour.
 * **Non-significant paths** → challenge assumptions about how AI influences learning.
 * **Good model fit indices** (CFI > 0.90, RMSEA < 0.08) → the theoretical model aligns well with the empirical data.
 
-This ties your entire thesis together by showing *how AI reshapes learning in a structured, causal manner.
+This ties your entire thesis together by showing how AI reshapes learning in a structured, causal manner.
 
 ----
 
