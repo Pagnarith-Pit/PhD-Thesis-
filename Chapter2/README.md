@@ -419,9 +419,7 @@ This connects directly to your main research question:
 
 ---
 
-### Comparisons between groups (t-tests)
-
-#### A. Group Comparisons (ANOVA, t-tests)
+### 2.1) Comparisons between groups (t-tests)
 
 #### **Why This Is Important**
 
@@ -444,7 +442,7 @@ Examples:
 * If STEM students use enabling AI tools more → this supports the idea that procedural/technical domains benefit differently.
 * If international students rely more on translation → this has implications for inclusivity and language support.
 
-### B. Correlations between AI proficiency, usage types, and outcomes
+### 2.2) Correlations between AI proficiency, usage types, and outcomes
 
 #### **Why This Is Important**
 
@@ -462,7 +460,7 @@ Your conceptual model assumes that factors like AI proficiency, usage style, and
 
 Correlations support your theorisation of *how AI use reshapes learning*.
 
-### C. Regressions predicting learning outcomes from usage categories
+### 2.3) Regressions predicting learning outcomes from usage categories
 
 #### **Why This Is Important**
 
@@ -485,11 +483,11 @@ This shapes your final argument about what AI tools actually do for learning.
 
 ---
 
-### **Structural and Exploratory Analyses**
+### **3) Structural and Exploratory Analyses**
 
 ---
 
-### **A. Factor analysis**
+### **3.1) Factor analysis**
 
 
 #### **Why This Is Important**
@@ -511,7 +509,7 @@ This strengthens the legitimacy of your qualitative findings.
 
 This helps bridge qualitative and quantitative insights.
 
-### **B. Path models (SEM)**
+### **3.2) Path models (SEM)**
 
 
 #### **Why This Is Important**
@@ -530,7 +528,8 @@ This produces a theoretically grounded explanation of student behaviour.
 * **Non-significant paths** → challenge assumptions about how AI influences learning.
 * **Good model fit indices** (CFI > 0.90, RMSEA < 0.08) → the theoretical model aligns well with the empirical data.
 
-This ties your entire thesis together by showing *how AI reshapes learning in a structured, causal manner*.
+This ties your entire thesis together by showing *how AI reshapes learning in a structured, causal manner.
+
 ----
 
 Together, these analyses determine:
