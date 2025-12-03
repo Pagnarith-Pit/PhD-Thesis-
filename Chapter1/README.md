@@ -236,6 +236,16 @@ $$
 
 ---
 
+### 4.4 Annotator Sourcing and Data Collection
+
+Where to source? Mechanical Turk, Online sourcing, or within University
+
+How to collect? Premade UI or self developed
+
+Compensation? What is the appropriate rate to encourage genuine responses?
+
+---
+
 ## 5. Human Preference Score
 
 For each pair $P_{i,j}$:
