@@ -345,11 +345,11 @@ Phase 2 will use a combination of descriptive, inferential, and exploratory stat
 
 ---
 
-### **Descriptive Statistics**
+### **1) Descriptive Statistics**
 
 ---
 
-### Prevalence of each usage pattern
+### 1.1) Prevalence of each usage pattern
 
 #### **Why This Is Important**
 
@@ -371,7 +371,7 @@ If a theme from Phase 1 shows up rarely in Phase 2, discuss this as:
 
 > “A behaviour observed in qualitative data but not widely generalisable at scale.”
 
-### Frequency distributions
+### 1.2) Frequency distributions
 
 #### **Why This Is Important**
 
@@ -392,7 +392,7 @@ These insights are critical for designing targeted interventions and understandi
 
 This helps you argue whether AI adoption is **diffuse or polarised**.
 
-### Mean scores for enabling vs. easing behaviours
+### 1.3) Mean scores for enabling vs. easing behaviours
 
 #### **Why This Is Important**
 
@@ -415,7 +415,7 @@ This connects directly to your main research question:
 
 ---
 
-### **Inferential Tests**
+### **2) Inferential Tests**
 
 ---
 
