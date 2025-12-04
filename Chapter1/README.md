@@ -692,8 +692,7 @@ From these posterior samples, we compute:
 1. **Posterior mean and credible intervals**:
 
 $$
-\hat{\alpha}_i = \frac{1}{S} \sum_{s=1}^{S} \alpha_i^{(s)}, \quad
-\text{CI}_{95\%} = \text{quantile}_{2.5\%}^{97.5\%}(\{\alpha_i^{(s)}\})
+\hat{\alpha}_i = \frac{1}{S} \sum_{s=1}^{S} \alpha_i^{(s)}, \quad \text{CI}_{95\%} = \text {quantile}_{2.5\%}^{97.5\%}(\{\alpha_i^{(s)}\})
 $$
 
 2. **Posterior probability that IF-enhanced is better**:
