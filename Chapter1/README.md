@@ -1,7 +1,47 @@
-# Motivation
-Guidance is one of the most important concepts of an AI tutor. After extensive work of unifying AI tutor desired behaviours, BEA 2025 landed on a few dimensions and "Providing Guidance" is one of them"
+# **Motivation**
 
-Lack definition and extremely hard to measure. So we begin by contributing to advancing the evaluation of this critical behavior. 
+The rapid advancement of Large Language Models (LLMs) has introduced new possibilities for scalable, personalised, and interactive learning support. Among these, one of the most widely anticipated applications is the use of LLMs as AI tutors capable of providing immediate feedback and adaptive guidance to learners. Despite this promise, current LLMs still fall short of achieving the depth and consistency of effective human tutoring. While these models excel at surface-level language tasks—largely due to their extensive exposure to linguistic patterns during pre-training—they often lack the deeper pedagogical reasoning required for high-quality tutoring.
+
+A key challenge stems from the fact that *effective tutoring is not merely a linguistic task but a pedagogical one*. Human tutors draw on principles such as scaffolding, contingent feedback, and adjustment to a learner’s zone of proximal development. These practices involve strategic choices—varying the specificity of hints, diagnosing misconceptions, guiding the learner through intermediate steps—that cannot be reduced to token-level pattern reproduction. Although pre-training corpora may contain examples of tutoring dialogues, LLMs do not inherently internalize the instructional principles that underlie them.
+
+Compounding this issue is the absence of a unified, operational definition of what constitutes a “good” AI tutor. Recent work has begun to identify desirable behaviours—such as providing relevant hints, maintaining supportive tone, and preserving coherence across turns—but these dimensions remain fragmented, often drawing selectively from tutoring, conversational AI, and general NLP evaluation literature. Importantly, several behavioural traits (e.g., tone, coherence) overlap with established NLP metrics and often improve automatically with model size. In contrast, the ability to *provide pedagogical guidance*—helping learners progress without directly giving answers—remains uniquely tied to educational theory and substantially under-explored. Improving this behaviour is not only central to effective learning but also essential for closing the gap between human tutors and artificial tutoring systems.
+
+Given its pedagogical significance and the limited methodological tools available to study it, this chapter focuses on the dimension of **Providing Guidance**. To make progress, two challenges must be addressed: (1) evaluating guidance reliably, and (2) improving it meaningfully.
+
+### **1. Need for Better Evaluation: Addressing Construct Validity in LLM-as-a-Judge**
+
+Evaluating an AI tutor’s ability to provide guidance remains a methodological bottleneck. Although the field has widely adopted LLM-as-a-Judge frameworks for assessing model outputs, these approaches raise concerns beyond transparency and bias: **they lack construct validity**. That is, it is unclear whether the judging model is actually measuring the underlying pedagogical behaviour of *guidance*, or whether it is simply responding to surface-level textual cues correlated with “helpfulness.”
+
+Because these judge models were not trained to recognise tutoring strategies, they may reward answers that look helpful but are pedagogically ineffective—for example, responses that provide direct solutions rather than fostering learner thinking. Moreover, proprietary judge models embed unknown preferences, stylistic norms, and training distributions that may not align with educational theory. As a result, existing LLM-as-a-Judge scores risk conflating *linguistic fluency* with *instructional quality*, creating a systematic mismatch between what researchers intend to measure and what is actually being measured.
+
+Human expert evaluation remains the gold standard for assessing pedagogical behaviours, but it is slow, expensive, and difficult to scale. Therefore, there is a clear need for an automatic evaluation method that is transparent, reproducible, theoretically grounded, and explicitly aligned with the pedagogical construct of *guidance*. Study 1 addresses this gap.
+
+### **2. Improving Guidance: Examining Generalization from Instruction Following**
+
+Beyond evaluation, a central scientific question is whether a model’s ability to provide pedagogical guidance can be improved *indirectly* through enhanced instruction-following capabilities. Instruction following underpins many structured reasoning tasks, and improvements here often yield broad performance gains across domains. This raises a plausible hypothesis:
+**If guidance can be decomposed into a sequence of contingent instructional steps, then improving instruction following may enable the model to apply those steps more effectively in tutoring contexts.**
+
+There are several theoretical reasons this link might hold:
+
+* Many forms of guidance (e.g., offering hints, prompting self-explanation, breaking problems into subgoals) resemble structured, stepwise instructions.
+* Better instruction following may help models adhere more closely to tutor-style directives such as “don’t give the solution,” “ask the learner questions,” or “provide progressively more specific hints.”
+* Instruction-following finetuning often improves the model’s ability to handle sequential, multi-step reasoning—an essential component of pedagogical guidance.
+
+However, it is equally plausible that this transfer **may not** occur. Guidance is a fundamentally pedagogical construct: it requires diagnosing learner intent, adapting support contingent on errors, and knowing *when* and *how much* to reveal. These behaviours may involve deeper social-cognitive and pedagogical reasoning that cannot be acquired through generic instruction-following data. If improving instruction following fails to improve guidance, this would indicate that guidance is a *latent pedagogical skill*—one that requires dedicated datasets, targeted finetuning, or specialised training objectives rooted in educational theory.
+
+Study 2 therefore investigates not only whether instruction-following improvements transfer to tutoring behaviour, but also what this reveals about the nature of pedagogical guidance itself. The findings from this investigation will inform whether future AI tutors can be adapted through broad instruction tuning or whether they require **purpose-built pedagogical training** to meaningfully approximate human tutoring strategies.
+
+Accordingly, this chapter is guided by two research questions:
+
+* **How can we automatically and transparently evaluate an AI tutor’s ability to provide pedagogical guidance?**
+* **To what extent does improving a model’s instruction-following capabilities enhance its ability to guide learners effectively?**
+
+# Study Design
+
+### Definition
+We begin with the theoretical definition of "Providing Guidance" 
+
+However, "Providing Guidance" is inherently a human trait, difficult to define, lacking operational/formal defitnition that can capture accurately what it is in a neat formula. Instead, current implementations from instructors rely solely on prompts or model instructions, defining instead the tasks and desired outputs, with as much steps and explanations as possible - such as MathDIAL, Bridge, Instruct Not Assist, and all others. 
 
 ### Past work
 Here, we mention how we created and ran our experiments to come up with the CODE framework short paper
@@ -9,17 +49,18 @@ Here, we mention how we created and ran our experiments to come up with the CODE
 * Training scripts
 * Results in tables
 
-### Future Work
+### Planned Study
 Now, we set out to improve the guidance itself
 -> Shows that average conversation is short
 -> Better guidance would not only mean more effective pedagogical response but perhaps better engagement and more learning opportunities 
-
-However, we've established well that "Guidance" is inherently a human trait, difficult to define, lacking operational/formal defitnition that can capture accurately what it is in a neat formula. Instead, instructors rely solely on prompts or model instructions, defining instead the tasks and desired outputs, with as much steps and explanations as possible - such as MathDIAL, Bridge, Instruct Not Assist, and all others. 
 
 ### The Hypothesis
 With "Guidance" being guided by instructions in mind, it is a natural hypothesis that a model that can be more faithful and follow instructions better can provide better guidance. So the mission is two fold:
 
 1) Experiment on methods that would help enhance instruction following
+* Method should not require any parameter updates on base model, so it can be applied to proprietary models
+
+
 2) Test that on a tutoring dataset, to see that given the exact same input and the same model, the one that has its IF capabilities enhanced would provide superior guidance
 
 
@@ -34,7 +75,7 @@ This document describes the experimental setup and methodology for evaluating wh
 The study consists of two phases:
 
 1. **Phase 1 — IF Enhancement**
-   Train five base language models and five IF-enhanced variants on instruction-following datasets and verify improvements.
+   Conduct study to improve instruction following on five base language models (i.e., resulting in five IF-enhanced variants) on instruction-following datasets and verify improvements.
 
 2. **Phase 2 — Guidance Evaluation**
    For each tutoring input, generate **paired responses** from both versions of each model. Evaluate the pairs using **LLM-as-judge** and **human annotations**.
@@ -42,6 +83,9 @@ The study consists of two phases:
 ---
 
 ## 2. Phase 1: Improving Instruction Following
+
+### Theoretical and Operational Defintion
+
 
 Let
 
