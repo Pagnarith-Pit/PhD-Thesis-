@@ -465,32 +465,21 @@ Table with one row per model:
 |          ... |   ... |   ... |        ... |        ... |
 
 ---
-#### 2) Accuracy and confidence interval (Is LLM better than chance?)
+#### 2) Per-Model Accuracy and Confidence Interval (Is LLM better than chance?)
 
-#### Statistic
+For each model $M_i$, we perform a baseline assessment of the LLM Judge's agreement with the human majority ($\mathbf{h}$). This checks whether the judge performs significantly better than random chance ($50\%$) when evaluating a specific model pair.
 
-•	Accuracy: $\widehat{\mathrm{Acc}}_i = \frac{C_i}{N_i}$.
-
-#### Confidence Interval
-
-•	Use Wilson 95% CI for a proportion (better than normal approx):
-
-$$
-\text{Wilson CI: }\quad \widehat{p}=\frac{C_i}{N_i},\quad
-\mathrm{CI}_{\text{Wilson}} = \frac{\widehat{p} + \frac{z^2}{2N_i} \pm z\sqrt{\frac{\widehat{p}(1-\widehat{p})}{N_i} + \frac{z^2}{4N_i^2}}}{1 + \frac{z^2}{N_i}},\quad z=1.96.
-$$
-
-#### Hypothesis test
-•	Null $(H_0:)$ Acc $= 0.5$ (random). Alternative $(H_1:)$ Acc $> 0.5$.
-•	Exact one-sided binomial test (compute $P(X \ge C_i)$ under $X\sim\mathrm{Binom}(N_i,0.5)$):
-
-$$
-p_i = \sum_{k=C_i}^{N_i} \binom{N_i}{k} \, 0.5^{N_i}.
-$$
-
-#### Decision rule
-
-•	Declare predictive if $p_i < 0.05$ and $\widehat{\mathrm{Acc}}_i > 0.5$.
+* **Statistic:** Accuracy ($\widehat{\mathrm{Acc}}_i$) is the proportion of predictions where the LLM Judge matches the human majority: $\widehat{\mathrm{Acc}}_i = C_i / N_i$.
+* **Confidence Interval:** We use the **Wilson 95% Confidence Interval** for a proportion, which provides a more robust estimate than the normal approximation, especially near the boundary proportions (0 or 1):
+    $$
+    \text{Wilson CI: }\quad \widehat{p}=\frac{C_i}{N_i},\quad
+    \mathrm{CI}_{\text{Wilson}} = \frac{\widehat{p} + \frac{z^2}{2N_i} \pm z\sqrt{\frac{\widehat{p}(1-\widehat{p})}{N_i} + \frac{z^2}{4N_i^2}}}{1 + \frac{z^2}{N_i}},\quad z=1.96.
+    $$
+* **Hypothesis Test:** We test the null hypothesis that $\text{Accuracy} \le 0.5$ (random judge) using the **Exact One-Sided Binomial Test**:
+    $$
+    p_i = \sum_{k=C_i}^{N_i} \binom{N_i}{k} \, 0.5^{N_i}.
+    $$
+* **Decision Rule:** The judge is declared predictive for model $M_i$ if $p_i < 0.05$ and $\widehat{\mathrm{Acc}}_i > 0.5$.
 
 #### What to report
 
@@ -498,38 +487,20 @@ $$
 
 --- 
 
-#### 3) Positional-bias / asymmetry check (Is LLM systematically biased?)
+#### 3) Per-Model Bias with Systematic Error Check (Is LLM systematically biased?)
 
 #### Why
+We check for systematic bias by analyzing the pairs where the LLM Judge and humans disagree (**discordant pairs**). This assesses whether the judge is more prone to favoring the IF-enhanced response or the Base response when it makes an error.
 
-•	An LLM could be "biased" toward preferring IF-enhanced (or Base) even when humans don't.
+* **Data Used:** Only discordant pairs, where $m = n^i_{10} + n^i_{01}$.
+    * $n^i_{10}$: LLM prefers IF, Humans prefer Base (LLM **over-calls IF**).
+    * $n^i_{01}$: LLM prefers Base, Humans prefer IF (LLM **under-calls IF**).
 
-#### Data used
-
-•	Only discordant pairs where LLM and humans disagree: $n^i_{10}$ and $n^i_{01}. Let $m = n^i_{10} + n^i_{01}$.
-
-#### Exact McNemar (binomial) test
-
-•	Under $H_0$, $n^i_{10} \sim \mathrm{Binom}(m, 0.5)$.
-
-•	Two-sided exact p-value: probability of seeing an imbalance at least as extreme as observed. (Compute by summing binomial probabilities.)
-
-•	If $m$ is large, we may report continuity-corrected McNemar chi-square:
-
-$$
-\chi^2 = \frac{(|n_{10}-n_{01}|-1)^2}{n_{10}+n_{01}},
-$$
-
-with 1 d.f. — but prefer the exact test when $m < 25\text{–}30$.
-
-#### Discordant odds ratio
-
-•	$\widehat{\mathrm{OR}} = \frac{n^i_{10}}{n^i_{01}}$. If either cell is 0, add 0.5 to both (continuity correction).
-•	Approximate 95% CI on log scale:
-
-$$
-\log(\widehat{\mathrm{OR}}) \pm 1.96\sqrt{\frac{1}{n_{10}} + \frac{1}{n_{01}}}.
-$$
+* **Bias Test:** The **Exact McNemar's Test** checks if the counts of the two error types are symmetric ($H_0$: $n^i_{10} = n^i_{01}$), modeling $n^i_{10}$ under $\mathrm{Binom}(m, 0.5)$. We use the exact binomial test, or the continuity-corrected $\chi^2$ statistic if $m$ is large:
+    $$
+    \chi^2 = \frac{(|n_{10}-n_{01}|-1)^2}{n_{10}+n_{01}},\quad \text{(1 d.f.)}
+    $$
+* **Bias Magnitude:** The **Discordant Odds Ratio** ($\widehat{\mathrm{OR}}$) quantifies the direction and magnitude of the imbalance: $\widehat{\mathrm{OR}} = n^i_{10}/n^i_{01}$. A value significantly greater than 1 indicates a bias toward over-calling IF.
 
 #### Decision rule
 
@@ -541,60 +512,53 @@ $$
 
 ---
 
-#### 4) Multiple models: pooled inference across models
+#### 4) Pooled Inference and Robustness (Final Validation with Dependent Assumption)
 
-#### Why
+This section provides the primary statistical conclusion on the overall reliability of the chosen LLM Judge, explicitly addressing the dependency introduced by using shared conversation prompts.
 
-•	we have multiple models $(M_1,\dots,M_5)$. we may want an overall p-value.
-Fisher’s method
-•	Combine one-sided binomial p-values $\{p_i\}$:
+#### Dependency Correction
 
-$$
-\chi^2_{\text{Fisher}} = -2\sum_{i=1}^5 \ln(p_i),\quad \chi^2_{\text{Fisher}}\sim \chi^2_{10}.
-$$
+To ensure the final claim of the LLM Judge’s overall reliability is robust, we calculate the **Global Accuracy** across all 500 human-labeled pairs and correct the variance estimate for the dependency across models that share the same conversation prompt.
 
-•	Compute combined p-value from $\chi^2_{\text{Fisher}}$.
+* **The Problem:** The same **192 conversation prompts** are reused across the five models. Since judgments sharing a prompt are correlated (a prompt that is easy to judge for $M_1$ is likely easy for $M_5$), standard CIs and p-values are anti-conservative.
+* **Method:** We use **Cluster-Robust Bootstrapping**. This method treats the **Conversation ID ($k$)** as the unit of independence (the cluster), correctly partitioning the variance.
+    1.  **Resampling:** $B=2000$ bootstrap samples are generated by resampling the **192 unique Conversation IDs** with replacement.
+    2.  **Accuracy Calculation:** The pooled accuracy ($\widehat{\mathrm{Acc}}_{\text{Global}}$) is computed for each of the $B$ bootstrap samples.
+    3.  **Inference:** The **Cluster-Robust 95% CI** for the Global Accuracy is determined by the 2.5th and 97.5th percentiles of the resulting bootstrap distribution.
 
-#### Caveat
-
-•	Fisher assumes independent p-values. If the same human labels or items are reused across models, p-values may be correlated → Fisher can be anticonservative.
-Alternative (dependence-robust)
-
-•	Use permutation or bootstrap across items/human labels to get an empirical pooled p-value if dependence is suspected.
-
-#### Multiple-testing control for per-model claims
-•	If we make claims per model, correct the per-model p-value threshold for 5 tests (options):
-
-o	Bonferroni: threshold $= 0.05/5 = 0.01$ (strict).
-
-o	Benjamini–Hochberg (FDR): if we want discovery control, apply BH at $q=0.05$.
-
-#### What to report
-
-•	For pooled test: Fisher statistic, df, combined p-value, and note independence caveat. For per-model: raw p-values and corrected p-values (Bonferroni or FDR).
+* **Decision Rule:** The LLM Judge is declared globally reliable if the lower bound of the Cluster-Robust 95% CI exceeds $0.5$. We report the overall accuracy and the robust CI.
 
 ---
 
 #### 5) Results of LLM-Human Agreement Experiments
 
-For each model $(M_i)$, conclude LLM-as-judge is predictive if either:
+This section summarizes the criteria for determining the reliability of the LLM Judge, ensuring both **accuracy** and **lack of systematic bias** are evaluated for individual models and the pooled dataset.
 
-•	(A) Exact one-sided binomial p-value $(p_i < 0.05)$ and $\widehat{\mathrm{Acc}}_i > 0.5$ (report Wilson CI); or
+#### Per-Model Reliability Conclusion
 
-•	(B) McNemar’s exact test $p < 0.05$ and $n^i_{10} < n^i_{01}$ (i.e., LLM does not systematically overcall IF).
+For each model $(M_i)$, the LLM Judge is concluded to be **predictive** if it satisfies two complementary criteria:
 
-For overall pooled claim across models:
-•	Use Fisher’s method for a combined p-value, but explicitly state the independence caveat; if dependence is likely, present a permutation-based pooled p-value.
+1.  **(A) Baseline Predictive Accuracy:** The Exact one-sided binomial p-value $(p_i < 0.05)$ and $\widehat{\mathrm{Acc}}_i > 0.5$. This confirms the Judge's raw accuracy is significantly better than chance.
+2.  **(B) Absence of Systematic Error:** McNemar’s exact test **$p > 0.05$** (showing no significant error asymmetry); **OR** if $p < 0.05$, the bias must be in the direction of **under-calling IF** ($n^i_{10} < n^i_{01}$).
 
-In other words:
+We report $\widehat{\mathrm{Acc}}_i$, the **Wilson 95% CI**, the exact binomial p-value, and the exact McNemar p-value and **Discordant Odds Ratio** ($\widehat{\mathrm{OR}}$) for all models.
 
-•	High accuracy (e.g., 0.75) + significant binomial p → LLM matches humans well.
+---
 
-•	Acc $\approx 0.5$ + non-significant → LLM is no better than random.
+#### Overall Pooled Claim Across Models (Dependency Corrected)
 
-•	Significant McNemar with $(n_{10} > n_{01})$ → LLM tends to prefer IF even when humans don't (an overcall bias).
+The LLM Judge's overall reliability is determined by its **Global Accuracy** across the entire 500-pair human validation set, accounting for the dependency introduced by shared conversation prompts.
 
-•	Low inter-rater agreement among humans → humans disagree among themselves; be cautious interpreting LLM agreement with majority.
+* **Primary Metric (Accuracy and CI):** We report the **Global Accuracy** ($\widehat{\mathrm{Acc}}_{\text{Global}}$) along with its **Cluster-Robust 95% Confidence Interval (CI)**, derived from $B=2000$ bootstrap replicates clustered on the **Conversation ID**.
+* **Significance Test:** The LLM Judge is declared reliable overall if the **lower bound** of the Cluster-Robust 95% CI is **$> 0.5$** (i.e., significantly better than chance).
+
+---
+
+#### Interpretation Rule
+
+* **Low Inter-Rater Agreement ($\kappa$):** If Fleiss’ $\kappa$ is low ($\kappa < 0.4$), be cautious when interpreting the LLM's agreement with the human majority. This indicates high human disagreement, suggesting the task itself may be ambiguous or highly subjective.
+* **High Accuracy + Robust CI ($\text{CI}_{\text{lower}} > 0.5$):** LLM successfully matches human preference patterns across the population of prompts.
+* **Significant McNemar with $(n_{10} > n_{01})$:** LLM exhibits a dangerous bias, tending to prefer the IF-enhanced variant even when humans prefer the Base (an **overcall bias**). This LLM Judge must be either discarded or the bias must be statistically controlled for in downstream analysis.
 
 ## 4 Annotating the rest of the dataset
 After running the above tests, we want to end up with a judge model that can balance accuracy (with sigficant binom test) and the McNemar test to prevent bias
@@ -621,7 +585,7 @@ To estimate the effect of instruction-following (IF) enhancement on AI tutoring 
 
 ### 5.2 Model Formulation (Cross-Classified)
 
-Let $M_i$ be the base model and $M_i^{\text{IF}}$ its instruction-following–enhanced variant, for $i = 1,\dots,5$. Let $k$ index the conversation (prompt) used, for $k=1, \dots, 20$. For each paired response $P_{i,k} = (r_{i,k}^{\text{base}}, r_{i,k}^{\text{IF}})$:
+Let $M_i$ be the base model and $M_i^{\text{IF}}$ its instruction-following–enhanced variant, for $i = 1,\dots,5$. Let $k$ index the conversation (prompt) used, for $k=1, \dots, n$. For each paired response $P_{i,k} = (r_{i,k}^{\text{base}}, r_{i,k}^{\text{IF}})$:
 
 $$
 y_{i,k} =
@@ -657,7 +621,7 @@ We place hierarchical priors on both sets of effects.
 
 2.  **Conversation-Specific Effects ($\beta_k$)**:
     $$
-    \beta_k \sim \mathcal{N}(0, \tau^2), \quad k = 1, \dots, 20
+    \beta_k \sim \mathcal{N}(0, \tau^2), \quad k = 1, \dots, n
     $$
     * $\tau^2$ = variance of conversation effects (captures heterogeneity in prompt difficulty/bias)
     * Hyperprior: $\tau \sim \text{HalfNormal}(0,1)$
@@ -669,11 +633,11 @@ We place hierarchical priors on both sets of effects.
 Conditional on the model-specific effects ($\alpha_i$) and conversation effects ($\beta_k$), the likelihood of observed paired preferences $\mathbf{y} = \{y_{i,k}\}$ is:
 
 $$
-\mathcal{L}(\alpha_i, \beta_k \mid \mathbf{y}) = \prod_{i=1}^{5} \prod_{k=1}^{20} \Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k)^{y_{i,k}}
+\mathcal{L}(\alpha_i, \beta_k \mid \mathbf{y}) = \prod_{i=1}^{5} \prod_{k=1}^{192} \Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k)^{y_{i,k}}
 \left[1 - \Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k)\right]^{1 - y_{i,k}}
 $$
 
-The product now runs over all unique combinations of model pairs ($i$) and conversation prompts ($k$), totaling $5 \times 20 = 100$ individual judgments.
+The product now runs over all unique combinations of model pairs ($i$) and conversation prompts ($k$), totaling $5 \times 192 = 960$ individual judgments.
 
 ---
 
