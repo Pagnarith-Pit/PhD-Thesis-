@@ -38,7 +38,7 @@ Accordingly, this chapter is guided by two research questions:
 
 # Study Design
 
-### Definition
+## Definition
 We begin by establishing a more comprehensive working definition of Providing Guidance, which serves as the conceptual foundation for this study. In a tutoring dialogue, or when responding to a student’s question, an effective guiding response does not immediately supply the full answer or solution. Directly providing solutions may prematurely close off valuable learning opportunities. Instead, a guiding response should offer strategic pedagogical support—such as relevant hints, clarifying questions, partial explanations, or conceptual cues—that help the learner progress while still requiring them to engage cognitively with the problem.
 
 Importantly, such guidance enables students to make forward progress without being given the final answer. A well-constructed guiding response therefore preserves productive struggle, nudges the learner toward the correct reasoning pathway, and helps them refine or correct their thinking. Prior literature describes similar concepts using terms such as “helping a student”, “usefulness”, or “actionability”, yet all share the core idea of providing support that is both informative and non-spoiling.
@@ -78,46 +78,57 @@ A response with **high guidance** is one that has:
 * low Directness (no full solution provided)
 
 
-### Past work - Study 1
-Here, we mention how we created and ran our experiments to come up with the CODE framework short paper
-* Datasets
-* Training scripts
-* Results in tables
+## Study 1: Improving Guidance Evaluation (Completed)
+In Study 1, we conducted the initial investigation that produced the CODE Framework short paper. This involved constructing and evaluating a set of datasets and experimental protocols designed to isolate behaviours relevant to Providing Guidance. Specifically, Study 1 included:
 
-### Planned Study - Study 2
-Now, we set out to improve the guidance itself
--> Shows that average conversation is short
--> Better guidance would not only mean more effective pedagogical response but perhaps better engagement and more learning opportunities 
+* Datasets:
+Synthetic and real tutoring dialogues designed to probe relevance, indirectness, and scaffolding behaviour.
 
-### The Hypothesis
-With "Guidance" being guided by instructions in mind, it is a natural hypothesis that a model that can be more faithful and follow instructions better can provide better guidance. So the mission is two fold:
+* Training Scripts:
+Procedures for guiding models to exhibit differing levels and types of guidance, enabling systematic comparisons.
 
-1) Experiment on methods that would help enhance instruction following
-* Method should not require any parameter updates on base model, so it can be applied to proprietary models
+* Results:
+Quantitative tables and analyses demonstrating that models indeed vary in their ability to provide guidance, and that these behaviours can be meaningfully induced and measured.
 
+Study 1 serves as the empirical and conceptual foundation for the present work by establishing both the feasibility and importance of evaluating guidance in AI tutoring systems.
 
-2) Test that on a tutoring dataset, to see that given the exact same input and the same model, the one that has its IF capabilities enhanced would provide superior guidance
+## Study 2: Investigating the Effect of IF Capabilities on Guidance
 
+Study 2 aims to move beyond evaluation and directly investigate how to *improve* an AI tutor’s Guidance. Given our earlier formalisation, **Guidance** is strongly shaped by a model’s ability to correctly interpret and adhere to high-level tutoring instructions—such as *“do not reveal the answer,” “ask a clarifying question,” “offer a conceptual hint,”* and so on. This leads to the central hypothesis of Study 2:
 
-# Experimental Setup and Methods
+> **A model with stronger instruction-following (IF) capability will exhibit stronger Guidance, even when the underlying base model remains unchanged.**
 
-This document describes the experimental setup and methodology for evaluating whether improving a model's **Instruction-Following (IF)** ability leads to improved **Guidance** in AI tutoring.
+To test this hypothesis, Study 2 is organised around two core aims:
 
----
+1. **Develop and evaluate methods to enhance instruction-following**
+   These methods must *not* require parameter updates to the base model, ensuring they remain usable with proprietary LLMs. This includes inference-time or prompt-engineering techniques such as metaprompting, instruction rewriting, chain-of-instructions scaffolding, and lightweight auxiliary checks. The goal of this phase is to create **IF-enhanced variants** of several base models and verify that their instruction-following behaviour improves on standard IF benchmarks.
 
-## 1. Overview
-
-The study consists of two phases:
-
-1. **Phase 1 — IF Enhancement**
-   Conduct study to improve instruction following on five base language models (i.e., resulting in five IF-enhanced variants) on instruction-following datasets and verify improvements.
-
-2. **Phase 2 — Guidance Evaluation**
-   For each tutoring input, generate **paired responses** from both versions of each model. Evaluate the pairs using **LLM-as-judge** and **human annotations**.
+2. **Test whether IF-enhanced models provide better Guidance on tutoring tasks**
+   Using a fixed tutoring dataset, each tutoring prompt will be run through both the **original base model** and its **IF-enhanced counterpart**. This paired-input design ensures that any observed differences in Guidance quality are attributable solely to changes in instruction adherence—not to differences in model architecture, training data, or temperature settings.
 
 ---
 
-## 2. Phase 1: Improving Instruction Following
+### **Experimental Setup and Methods**
+
+This section describes the methodology used to test whether improving instruction-following leads to better Guidance in AI tutoring.
+
+### **1. Overview**
+
+Study 2 proceeds in two sequential phases:
+
+### **Phase 1 — Instruction-Following Enhancement**
+
+We apply and evaluate inference-time IF-enhancement techniques on **five base language models**, producing **five corresponding IF-enhanced variants**. Each enhanced variant is validated on instruction-following datasets to confirm measurable improvements in general IF behaviour.
+
+### **Phase 2 — Guidance Evaluation in Tutoring**
+
+For each tutoring input, we generate **paired responses**—one from the base model and one from its IF-enhanced version. These paired outputs are then evaluated for Guidance quality using both:
+
+* **LLM-as-a-Judge protocols**, and
+* **human annotations**
+
+
+## Phase 1: Improving Instruction Following
 
 ### Theoretical and Operational Defintion
 
@@ -144,7 +155,7 @@ Each model therefore has two versions:
 
 ---
 
-### 2.1 Instruction-Following Training
+### 1. Instruction-Following Training
 
 Each $M_i^{\text{IF}}$ is trained with:
 
@@ -154,7 +165,7 @@ Each $M_i^{\text{IF}}$ is trained with:
 
 ---
 
-### 2.2 Instruction-Following Evaluation
+### 2 Instruction-Following Evaluation
 
 We evaluate IF performance using a benchmark $\mathcal{B}_{\text{IF}}$:
 
@@ -176,9 +187,8 @@ $$
 $$
 
 
----
 
-## 3. Phase 2: Evaluating Tutoring Guidance
+## Phase 2: Evaluating Tutoring Guidance
 
 We use **192 tutoring dialogue prompts** from:
 
@@ -197,7 +207,7 @@ Each sample $d_i$ contains:
 * Conversation History $H$ : a problem to solve, plus conversations between a student and a tutor, ending with the student's turn
 
 
-### 3.1 Response Pair Generation
+## 1. Response Pair Generation
 
 Response generation then follows the protocol laid out in **BRIDGE** 
 
@@ -243,9 +253,7 @@ $$
 $$
 
 
----
-
-## 4. Human Evaluation with Stratified Sampling
+## 2. Human Evaluation with Stratified Sampling
 We want established ground truth label from actual students, but to ensure robustness of the result, we want to have at least 3 annotators so we can filter out any noise of a single annotator. The minimum is 3 to break ties.
 
 However, annotating the entire dataset 3 folds would require extensive time and too much resources. Instead, we do this in two steps, human annotation on samples, then use LLM as a Judge to complete the rest. 
@@ -258,7 +266,7 @@ $$
 $$
 
 
-### 4.1 Stratified Sampling Goals
+### 2.1 Stratified Sampling Goals
 
 The human evaluation ensures:
 
@@ -268,9 +276,7 @@ The human evaluation ensures:
 4. **Each pair is annotated by 3 independent annotators**
 5. **Each pair must be seen in a reverse order by at least one annotator to account for positional bias**
 
----
-
-### 4.2 Annotator Allocation
+### 2.2 Annotator Allocation
 
 Let:
 
@@ -294,9 +300,7 @@ $$
 $$
 
 
----
-
-### 4.3 Pair-Level Constraints
+### 2.3 Pair-Level Constraints
 
 1. **No annotator sees both sides separately**:
 
@@ -313,9 +317,8 @@ $$
 |\{ a_k : P_{i,j} \in B_k \}| = 3
 $$
 
----
 
-### 4.4 Annotator Sourcing and Data Collection
+### 2.4 Annotator Sourcing and Data Collection
 
 Where to source? Mechanical Turk, Online sourcing, or within University
 
@@ -323,9 +326,8 @@ How to collect? Premade UI or self developed
 
 Compensation? What is the appropriate rate to encourage genuine responses?
 
----
 
-## 5. Human Preference Score
+### 2.5 Human Preference Score
 
 For each pair $P_{i,j}$:
 
@@ -347,7 +349,7 @@ $$
 $$
 
 
-### 5.1 Inter-rater agreement
+### 2.6 Inter-rater agreement
 
 Inter-rater agreement (R = 3 raters) is computed using Fleiss’ κ.
 
@@ -389,14 +391,10 @@ $$
 Optional: report per-model κ by restricting J to items in $\mathcal{P}_i^{\text{sample}}$.
 Also report bootstrap CIs by resampling items j and recomputing κ.
 
----
-
-## 6. Selecting LLM as a Judge of Guidance Preference
+## 3. Selecting LLM as a Judge of Guidance Preference
 To annotate the rest of the dataset, we now pick the best LLM that can function as a judge. Using the data sampled above (N = 500)
 
----
-
-### 6.1 Using LLM as a Judge
+### 3.1 Using LLM as a Judge
 
 **The test must be run twice, with each pair in reverse order to prevent positional bias, keeping only samples that is consistent**
 **That is, only keep sample if A is better than B, when a judge moodel is shown Instruction + A,B vs Instruction + B,A**
@@ -420,7 +418,7 @@ $$
 
 Currently, the best model might be Gemini 3, as it has LearnLM merged into it, with their paper claiming that evaluating pedagogical is easier than implementing it, suggesting a good performance. Needs to be tested on the data to confirm. That is, we rerun Gemini 3 with the Guidance Test Set (as it has ground truth label), and see which is a good judge
 
-### 6.2 LLM Agreement with Human
+### 3.2 LLM Agreement with Human
 Here, we will perform a series of test to see which model can function best as a judge, such that we can use it to annotate the rest of our dataset
 
 #### 1) Basic Count for each model
@@ -577,7 +575,7 @@ o	Benjamini–Hochberg (FDR): if we want discovery control, apply BH at $q=0.05$
 
 ---
 
-### 6.3 Results of LLM-Human Agreement Experiments
+#### 5) Results of LLM-Human Agreement Experiments
 
 For each model $(M_i)$, conclude LLM-as-judge is predictive if either:
 
@@ -598,22 +596,18 @@ In other words:
 
 •	Low inter-rater agreement among humans → humans disagree among themselves; be cautious interpreting LLM agreement with majority.
 
----
-
-### 6.4 Annotating the rest of the dataset
+## 4 Annotating the rest of the dataset
 After running the above tests, we want to end up with a judge model that can balance accuracy (with sigficant binom test) and the McNemar test to prevent bias
 
 We then use this judge to annotate the entire datasets (remaining 460 samples) so we would then get the full 960 annotated labels of preferred dialogue pairs
 
---- 
 
-## 7. Bayesian Sampling For Effect Estimation
+## 5. Bayesian Sampling For Effect Estimation
 
 After obtaining the complete annotated dataset of paired responses $\mathcal{P} = \{P_{i,j}\}$ with human and/or LLM preference labels, we estimate the effect of instruction-following (IF) enhancement on tutoring guidance using a **Bayesian Bradley–Terry model**.
 
----
 
-### 7.1 Model Formulation
+### 5.1 Model Formulation
 
 For each pair $P_{i,j} = (r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}})$, let
 
@@ -636,7 +630,7 @@ $$
 
 ---
 
-### 7.2 Latent Effect Parameter
+### 5.2 Latent Effect Parameter
 
 Define the **instruction-following effect** parameter for model $M_i$ as:
 
@@ -656,7 +650,7 @@ $$
 
 ---
 
-### 7.3 Bayesian Specification
+### 5.3 Bayesian Specification
 
 We place a weakly informative prior on $\alpha_i$:
 
@@ -673,7 +667,7 @@ $$
 
 ---
 
-### 7.4 Posterior Inference
+### 5.4 Posterior Inference
 
 The posterior over $\alpha_i$ is:
 
@@ -703,7 +697,7 @@ $$
 
 ---
 
-### 7.5 Pooled Effect Across Models
+### 5.5 Pooled Effect Across Models
 
 To estimate the **overall effect** across all 5 models, define:
 
@@ -725,7 +719,7 @@ From $\{\alpha_{\text{pooled}}^{(s)}\}$, we report:
 
 ---
 
-### 7.6 Interpretation
+### 5.6 Interpretation
 
 - $\alpha_i > 0$ → Model $M_i^{\text{IF}}$ provides superior guidance.  
 - $\alpha_{\text{pooled}} > 0$ → IF enhancement improves guidance **on average** across all models.  
