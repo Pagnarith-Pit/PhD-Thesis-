@@ -602,125 +602,111 @@ After running the above tests, we want to end up with a judge model that can bal
 We then use this judge to annotate the entire datasets (remaining 460 samples) so we would then get the full 960 annotated labels of preferred dialogue pairs
 
 
-## 5. Bayesian Sampling For Effect Estimation
+## 5. Bayesian Cross-Classified Bradley–Terry Model for Effect Estimation
 
-After obtaining the complete annotated dataset of paired responses $\mathcal{P} = \{P_{i,j}\}$ with human and/or LLM preference labels, we estimate the effect of instruction-following (IF) enhancement on tutoring guidance using a **Bayesian Bradley–Terry model**.
+To estimate the effect of instruction-following (IF) enhancement on AI tutoring guidance, we employ a **Bayesian Cross-Classified Hierarchical Bradley–Terry (BT) model**. This approach explicitly models the effect of the IF enhancement while simultaneously accounting for **variability across models** and **correlation across common conversation prompts**. This ensures accurate uncertainty quantification by partitioning the variance.
 
+### 5.1 Justification for Hierarchical and Cross-Classified Modeling
 
-### 5.1 Model Formulation
+* **Partial pooling / shrinkage**:
+    Some models may have fewer paired observations or noisier preferences. Hierarchical modeling “borrows strength” across models, shrinking noisy estimates ($\alpha_i$) toward the group mean ($\mu$) and reducing overconfidence.
+* **Accounting for Data Dependency**:
+    By treating the conversation ID ($k$) as a random effect ($\beta_k$), the model correctly controls for the correlation among judgments that share the same input prompt, preventing the overestimation of precision (narrow credible intervals).
+* **Robust pooled inference**:
+    The posterior over the overall mean effect ($\mu$) gives a principled measure of the average IF enhancement effect across all models, with proper uncertainty quantification.
+* **Flexibility**:
+    The variance hyperparameters ($\sigma^2$ and $\tau^2$) capture heterogeneity in effects across models ($\sigma^2$) and heterogeneity in judgment difficulty across conversations ($\tau^2$).
 
-For each pair $P_{i,j} = (r_{i,j}^{\text{base}}, r_{i,j}^{\text{IF}})$, let
+---
+
+### 5.2 Model Formulation (Cross-Classified)
+
+Let $M_i$ be the base model and $M_i^{\text{IF}}$ its instruction-following–enhanced variant, for $i = 1,\dots,5$. Let $k$ index the conversation (prompt) used, for $k=1, \dots, 20$. For each paired response $P_{i,k} = (r_{i,k}^{\text{base}}, r_{i,k}^{\text{IF}})$:
 
 $$
-y_{i,j} =
+y_{i,k} =
 \begin{cases}
-1, & \text{IF-enhanced response preferred} \\
-0, & \text{base response preferred}
+1 & \text{IF-enhanced response preferred} \\
+0 & \text{base response preferred}
 \end{cases}
 $$
 
-We assume each model $M_i$ has a latent **guidance strength** parameter $\theta_i^{\text{base}}$ for the base response and $\theta_i^{\text{IF}}$ for the IF-enhanced response.
+We define:
+* $\alpha_i$: The **model-specific latent guidance strength** (effect of IF enhancement on model $M_i$).
+* $\beta_k$: The **conversation-specific random effect** (bias introduced by the $k$-th input prompt).
 
-The **Bradley–Terry probability** that the IF-enhanced response is preferred over the base response is:
-
-$$
-\Pr(y_{i,j} = 1 \mid \theta_i^{\text{base}}, \theta_i^{\text{IF}}) =
-\frac{\exp(\theta_i^{\text{IF}})}{\exp(\theta_i^{\text{IF}}) + \exp(\theta_i^{\text{base}})}
-$$
-
----
-
-### 5.2 Latent Effect Parameter
-
-Define the **instruction-following effect** parameter for model $M_i$ as:
+The BT probability is now modeled with **two separate latent effects** in the linear predictor:
 
 $$
-\alpha_i = \theta_i^{\text{IF}} - \theta_i^{\text{base}}
-$$
-
-Then the probability simplifies to:
-
-$$
-\Pr(y_{i,j} = 1 \mid \alpha_i) = \frac{\exp(\alpha_i)}{1 + \exp(\alpha_i)}
-$$
-
-- $\alpha_i > 0$ → IF-enhanced response is more likely preferred  
-- $\alpha_i = 0$ → no effect  
-- $\alpha_i < 0$ → base response is more likely preferred
-
----
-
-### 5.3 Bayesian Specification
-
-We place a weakly informative prior on $\alpha_i$:
-
-$$
-\alpha_i \sim \mathcal{N}(0, 1)
-$$
-
-The likelihood of observed preferences $\mathbf{y}_i = \{y_{i,j}\}_{j=1}^{192}$ is:
-
-$$
-\mathcal{L}(\alpha_i \mid \mathbf{y}_i) = \prod_{j=1}^{192} \Pr(y_{i,j} = 1 \mid \alpha_i)^{y_{i,j}} 
-\left[1 - \Pr(y_{i,j} = 1 \mid \alpha_i)\right]^{1 - y_{i,j}}
+\Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k) = \frac{\exp(\alpha_i + \beta_k)}{1 + \exp(\alpha_i + \beta_k)}
 $$
 
 ---
 
-### 5.4 Posterior Inference
+### 5.3 Hierarchical Prior Structure
 
-The posterior over $\alpha_i$ is:
+We place hierarchical priors on both sets of effects. 
 
-$$
-p(\alpha_i \mid \mathbf{y}_i) \propto \mathcal{L}(\alpha_i \mid \mathbf{y}_i) \, p(\alpha_i)
-$$
+1.  **Model-Specific Effects ($\alpha_i$)**:
+    $$
+    \alpha_i \sim \mathcal{N}(\mu, \sigma^2), \quad i = 1, \dots, 5
+    $$
+    * $\mu$ = overall mean effect of IF enhancement (pooled effect)
+    * $\sigma^2$ = variance of effects across models
+    * Hyperpriors: $\mu \sim \mathcal{N}(0, 1), \quad \sigma \sim \text{HalfNormal}(0,1)$
 
-We use **Hamiltonian Monte Carlo (HMC)** with the **No-U-Turn Sampler (NUTS)** to draw $S = 4000$ samples from the posterior:
-
-$$
-\{\alpha_i^{(s)}\}_{s=1}^{S} \sim p(\alpha_i \mid \mathbf{y}_i)
-$$
-
-From these posterior samples, we compute:
-
-1. **Posterior mean and credible intervals**:
-
-$$
-\hat{\alpha}_i = \frac{1}{S} \sum_{s=1}^{S} \alpha_i^{(s)}, \quad \text{CI}_{95\%} = \text {quantile}_{2.5\%}^{97.5\%}(\{\alpha_i^{(s)}\})
-$$
-
-2. **Posterior probability that IF-enhanced is better**:
-
-$$
-\Pr(\alpha_i > 0 \mid \mathbf{y}_i) = \frac{1}{S} \sum_{s=1}^{S} \mathbf{1}\{\alpha_i^{(s)} > 0\}
-$$
+2.  **Conversation-Specific Effects ($\beta_k$)**:
+    $$
+    \beta_k \sim \mathcal{N}(0, \tau^2), \quad k = 1, \dots, 20
+    $$
+    * $\tau^2$ = variance of conversation effects (captures heterogeneity in prompt difficulty/bias)
+    * Hyperprior: $\tau \sim \text{HalfNormal}(0,1)$
 
 ---
 
-### 5.5 Pooled Effect Across Models
+### 5.4 Likelihood (Conditional on Two Random Effects)
 
-To estimate the **overall effect** across all 5 models, define:
-
-$$
-\alpha_{\text{pooled}} = \frac{1}{5} \sum_{i=1}^{5} \alpha_i
-$$
-
-We can compute the posterior distribution of $\alpha_{\text{pooled}}$ by averaging the posterior samples from each model:
+Conditional on the model-specific effects ($\alpha_i$) and conversation effects ($\beta_k$), the likelihood of observed paired preferences $\mathbf{y} = \{y_{i,k}\}$ is:
 
 $$
-\alpha_{\text{pooled}}^{(s)} = \frac{1}{5} \sum_{i=1}^{5} \alpha_i^{(s)}, \quad s = 1, \dots, S
+\mathcal{L}(\alpha_i, \beta_k \mid \mathbf{y}) = \prod_{i=1}^{5} \prod_{k=1}^{20} \Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k)^{y_{i,k}}
+\left[1 - \Pr(y_{i,k} = 1 \mid \alpha_i, \beta_k)\right]^{1 - y_{i,k}}
 $$
 
-From $\{\alpha_{\text{pooled}}^{(s)}\}$, we report:
-
-- Posterior mean $\hat{\alpha}_{\text{pooled}}$  
-- 95% credible interval  
-- Posterior probability $\Pr(\alpha_{\text{pooled}} > 0 \mid \mathbf{y})$
+The product now runs over all unique combinations of model pairs ($i$) and conversation prompts ($k$), totaling $5 \times 20 = 100$ individual judgments.
 
 ---
 
-### 5.6 Interpretation
+### 5.5 Posterior Inference
 
-- $\alpha_i > 0$ → Model $M_i^{\text{IF}}$ provides superior guidance.  
-- $\alpha_{\text{pooled}} > 0$ → IF enhancement improves guidance **on average** across all models.  
-- The Bayesian credible intervals and posterior probabilities quantify uncertainty, providing a principled measure of effect size beyond simple preference counts.
+The posterior over all parameters:
+
+$$
+p(\mu, \sigma, \tau, \{\alpha_i\}, \{\beta_k\} \mid \mathbf{y}) \propto \mathcal{L}(\{\alpha_i\}, \{\beta_k\} \mid \mathbf{y}) \cdot p(\{\alpha_i\} \mid \mu, \sigma) \cdot p(\{\beta_k\} \mid \tau) \cdot p(\mu) \cdot p(\sigma) \cdot p(\tau)
+$$
+
+Inference is performed using **Hamiltonian Monte Carlo (HMC)** with the **No-U-Turn Sampler (NUTS)**. Draw $S = 4000$ posterior samples for all parameters.
+
+---
+
+### 5.6 Posterior Summaries
+
+The summaries for $\hat{\alpha}_i$, $\hat{\mu}$, and $\hat{\sigma}$ remain the same, but we add a new summary for the conversation variability:
+
+4.  **Across-conversation variability**:
+
+$$
+\hat{\tau} = \frac{1}{S} \sum_{s=1}^{S} \tau^{(s)}, \quad \text{CI}_{95\%} = \text{quantile}_{2.5\%}^{97.5\%}({\tau^{(s)}})
+$$
+
+* Large $\tau$ → high variance in human preference across different conversation prompts (i.e., some prompts are much harder/easier to score than others).
+
+---
+
+### 5.7 Interpretation
+
+* $\alpha_i > 0$ → model-specific IF-enhanced responses provide superior guidance.
+* $\mu > 0$ → IF enhancement improves guidance on average across all models.
+* **Credible intervals and posterior probabilities** quantify uncertainty, now correctly adjusted by the $\tau$ parameter.
+* $\sigma$ captures cross-model heterogeneity, and **$\tau$ captures cross-conversation heterogeneity**, informing whether certain models or prompts drove the judgment variability.
+
