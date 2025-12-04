@@ -62,11 +62,7 @@ $$
 where $R_t^*$ maximises:
 
 $$
-R_t^* = \arg\max_{R \in \mathcal{R}}
-\left[\text{Relevance}(R, S_t)
-+ \text{Usefulness}(R, S_t)
-- \text{Directness}(R, S_t)
-  \right]
+R_t^* = \arg\max_{R \in \mathcal{R}} \left[\text{Relevance}(R, S_t) + \text{Usefulness}(R, S_t) - \text{Directness}(R, S_t) \right]
 $$
 
 with:
