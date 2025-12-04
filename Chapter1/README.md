@@ -4,7 +4,7 @@ The rapid advancement of Large Language Models (LLMs) has introduced new possibi
 
 A key challenge stems from the fact that *effective tutoring is not merely a linguistic task but a pedagogical one*. Human tutors draw on principles such as scaffolding, contingent feedback, and adjustment to a learner’s zone of proximal development. These practices involve strategic choices—varying the specificity of hints, diagnosing misconceptions, guiding the learner through intermediate steps—that cannot be reduced to token-level pattern reproduction. Although pre-training corpora may contain examples of tutoring dialogues, LLMs do not inherently internalize the instructional principles that underlie them.
 
-Compounding this issue is the absence of a unified, operational definition of what constitutes a “good” AI tutor. Recent work has begun to identify desirable behaviours—such as providing relevant hints, maintaining supportive tone, and preserving coherence across turns—but these dimensions remain fragmented, often drawing selectively from tutoring, conversational AI, and general NLP evaluation literature. Importantly, several behavioural traits (e.g., tone, coherence) overlap with established NLP metrics and often improve automatically with model size. In contrast, the ability to *provide pedagogical guidance*—helping learners progress without directly giving answers—remains uniquely tied to educational theory and substantially under-explored. Improving this behaviour is not only central to effective learning but also essential for closing the gap between human tutors and artificial tutoring systems.
+Compounding this issue is the absence of a unified, operational definition of what constitutes a “good” AI tutor. Recent work has begun to identify desirable behaviours—such as providing relevant hints, maintaining supportive tone, and preserving coherence across turns—but these dimensions remain fragmented, often drawing selectively from tutoring, conversational AI, and general NLP evaluation literature. Importantly, several behavioural traits (e.g., tone, coherence) overlap with established NLP metrics and often improve automatically with model size. In contrast, the ability to *provide pedagogical guidance*—helping learners progress without revelaing answers or solutions immediately—remains uniquely tied to educational theory and substantially under-explored. Improving this behaviour is not only central to effective learning but also essential for closing the gap between human tutors and artificial tutoring systems.
 
 Given its pedagogical significance and the limited methodological tools available to study it, this chapter focuses on the dimension of **Providing Guidance**. To make progress, two challenges must be addressed: (1) evaluating guidance reliably, and (2) improving it meaningfully.
 
@@ -39,17 +39,58 @@ Accordingly, this chapter is guided by two research questions:
 # Study Design
 
 ### Definition
-We begin with the theoretical definition of "Providing Guidance" 
+We begin by establishing a more comprehensive working definition of Providing Guidance, which serves as the conceptual foundation for this study. In a tutoring dialogue, or when responding to a student’s question, an effective guiding response does not immediately supply the full answer or solution. Directly providing solutions may prematurely close off valuable learning opportunities. Instead, a guiding response should offer strategic pedagogical support—such as relevant hints, clarifying questions, partial explanations, or conceptual cues—that help the learner progress while still requiring them to engage cognitively with the problem.
 
-However, "Providing Guidance" is inherently a human trait, difficult to define, lacking operational/formal defitnition that can capture accurately what it is in a neat formula. Instead, current implementations from instructors rely solely on prompts or model instructions, defining instead the tasks and desired outputs, with as much steps and explanations as possible - such as MathDIAL, Bridge, Instruct Not Assist, and all others. 
+Importantly, such guidance enables students to make forward progress without being given the final answer. A well-constructed guiding response therefore preserves productive struggle, nudges the learner toward the correct reasoning pathway, and helps them refine or correct their thinking. Prior literature describes similar concepts using terms such as “helping a student”, “usefulness”, or “actionability”, yet all share the core idea of providing support that is both informative and non-spoiling.
 
-### Past work
+However, as discussed earlier, this tutoring behaviour is deeply human and inherently variable across educators, instructional philosophies, and teaching contexts. As a result, it is not feasible to specify a single, complete operational definition that fully captures the subtlety of guidance in a closed-form equation. Nevertheless, for the purpose of empirical investigation, we attempt to represent and formalize the behaviour of an AI tutor in a structured manner, as follows:
+
+Let:
+
+* $S_t$ denote the **student message** at dialogue turn $t$
+* $H_t = {(S_1, R_1), \dots, (S_{t}, R_{t})}$ denote the **dialogue history**
+* $R_t$ denote the **tutor (model) response** at turn $t$
+
+The goal of a tutor at turn $t$ is to generate a response $R_t$ that moves the learner closer to the task goal **without fully solving the task for them**.
+
+We define *Guidance* as a mapping from the current dialogue state to a tutor response that optimally balances *support* and *non-disclosure* of the final solution.
+
+$$
+\mathcal{Guidance}(H_t, S_t) = R_t^*
+$$
+
+where $R_t^*$ maximises:
+
+$$
+R_t^* = \arg\max_{R \in \mathcal{R}}
+\left[\text{Relevance}(R, S_t)
+
++ \text{Usefulness}(R, S_t)
+
+- \text{Directness}(R, S_t)
+  \right]
+$$
+
+with:
+
+* **Relevance**: how directly the response addresses the student’s immediate question
+* **Usefulness**: the extent to which the response helps the student make progress
+* **Directness**: the extent to which the response *gives away the answer*
+
+A response with **high guidance** is one that has:
+
+* high Relevance
+* high Usefulness (e.g., hinting, prompting, scaffolding)
+* low Directness (no full solution provided)
+
+
+### Past work - Study 1
 Here, we mention how we created and ran our experiments to come up with the CODE framework short paper
 * Datasets
 * Training scripts
 * Results in tables
 
-### Planned Study
+### Planned Study - Study 2
 Now, we set out to improve the guidance itself
 -> Shows that average conversation is short
 -> Better guidance would not only mean more effective pedagogical response but perhaps better engagement and more learning opportunities 
