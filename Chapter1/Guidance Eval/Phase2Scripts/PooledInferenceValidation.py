@@ -13,6 +13,7 @@ def pooled_inference_validation(df_validation):
     """
 
     unique_ids = df_validation['conversation_id'].unique()
+    # Could change this for more or less bootstrap samples
     n_boot = 5000
     boot_accuracies = []
 
