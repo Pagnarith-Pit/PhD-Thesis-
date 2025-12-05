@@ -660,12 +660,12 @@ The summaries for $\hat{\alpha}_i$, $\hat{\mu}$, and $\hat{\sigma}$ remain the s
 4.  **Across-conversation variability**:
 
 $$
-\hat{\tau} = \frac{1}{S} \sum_{s=1}^{S} \tau^{(s)}
+\hat{\tau} = \frac{1}{S} \sum_{s=1}^{S} \tau^{(s)}, \quad  \mathrm{CI}_{\mathrm{95\\\%}} = \mathrm{quantile}_{\mathrm{2.5\\\%}}^{\mathrm{97.5\\\%}}({\tau^{(s)}})
 $$
 
-$$
-\mathrm{CI}_{\mathrm{95\%}} = \mathrm{quantile}_{\mathrm{2.5\%}}^{\mathrm{97.5\%}}({\tau^{(s)}})
-$$
+
+
+
 
 * Large $\tau$ → high variance in human preference across different conversation prompts (i.e., some prompts are much harder/easier to score than others).
 
