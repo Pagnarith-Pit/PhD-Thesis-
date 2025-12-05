@@ -43,9 +43,7 @@ def fleiss_kappa(ratings_df, R=3, C=2):
     # Sum of counts in each category divided by total number of assignments (J * R)
     p_c = n_jc.sum(axis=0) / (J * R)
     
-    # 3. Item-wise agreement (P_j)
-    # P_j = (1 / R(R-1)) * sum_c [n_j,c * (n_j,c - 1)]
-    
+    # 3. Item-level agreement (P_j)
     # Calculate the numerator: sum_c [n_j,c * (n_j,c - 1)]
     # This is the sum of pairs of raters agreeing on category c for item j
     numerator = (n_jc * (n_jc - 1)).sum(axis=1)
@@ -53,6 +51,7 @@ def fleiss_kappa(ratings_df, R=3, C=2):
     # Calculate the denominator: R * (R - 1)
     denominator = R * (R - 1)
     
+    # This is the item-wise agreement
     P_j = numerator / denominator
 
     # 4. Mean observed agreement (P_bar)

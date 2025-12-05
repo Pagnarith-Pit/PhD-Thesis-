@@ -6,6 +6,9 @@ from math import log, sqrt
 # --- CONSTANTS ---
 Z_SCORE_95 = 1.96 # For 95% Confidence Intervals
 
+## This evaluation script covers sections 3: Selecting LLM as a Judge of Guidance Preference
+# This is specifically for 3.2 LLM agreement with Human from 1) Basic Counts, 2) Per Model Accuracy and CI, 3) Bias Analysis with McNemar
+
 def calculate_basic_counts(df):
     """
     1) Calculates C_i, N_i, n^i_10, and n^i_01 for each model (i).

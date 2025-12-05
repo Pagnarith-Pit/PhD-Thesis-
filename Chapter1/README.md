@@ -155,7 +155,7 @@ Each model therefore has two versions:
 
 ---
 
-### 1. Instruction-Following Training
+### 1. Instruction-Following Modification
 
 Each $M_i^{\text{IF}}$ is trained with:
 

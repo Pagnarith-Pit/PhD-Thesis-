@@ -1,0 +1,5 @@
+{
+    "prompt_Determine_Error": "What is the error in the student's reasoning?",
+    "prompt_Determine_Strat_Intent": "What strategy is the tutor using, and what is their intention?",
+    "prompt_Decision_Making": "Based on the analysis, what should the tutor say next?"
+}
