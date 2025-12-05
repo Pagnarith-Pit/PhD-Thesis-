@@ -664,7 +664,7 @@ $$
 $$
 
 $$
-\quad \text{CI}_{95\%} = \text{quantile}_{2.5\%}^{97.5\%}({\tau^{(s)}})
+\text{CI}_{95\%} = \text{quantile}_{2.5\%}^{97.5\%}({\tau^{(s)}})
 $$
 
 * Large $\tau$ → high variance in human preference across different conversation prompts (i.e., some prompts are much harder/easier to score than others).
