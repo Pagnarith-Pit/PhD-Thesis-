@@ -661,7 +661,9 @@ The summaries for $\hat{\alpha}_i$, $\hat{\mu}$, and $\hat{\sigma}$ remain the s
 
 $$
 \hat{\tau} = \frac{1}{S} \sum_{s=1}^{S} \tau^{(s)}
+$$
 
+$$
 \quad \text{CI}_{95\%} = \text{quantile}_{2.5\%}^{97.5\%}({\tau^{(s)}})
 $$
 
