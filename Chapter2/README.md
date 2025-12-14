@@ -52,7 +52,7 @@ To address this gap, the present study draws on the Substitution, Augmentation, 
 
 SAMR is therefore uniquely suited to evaluating whether AI enhances education in a pedagogically meaningful way or merely accelerates or outsources existing tasks. This distinction is especially relevant given current debates on academic integrity, cognitive offloading, and the risk of over-reliance on AI.
 
-We explicitly use SAMR as "sensitising framework". A sensitising concept helps you notice relevant things without determining what the data must be. This means that SAMR is used to guide question creation, but then analysis are performed inductively without forcing data into a predefined model. After themes emerge, we then apply SAMR deductively for final interpreation. 
+We explicitly use SAMR as "sensitising framework". A sensitising concept helps us notice relevant things without determining what the data must be. This means that SAMR is used to guide question creation, but then analysis are performed inductively without forcing data into a predefined model. After themes emerge, we then apply SAMR deductively for final interpreation. 
 
 ### Justification for Exploratory Design 
 
@@ -128,7 +128,7 @@ Sentiment analysis provides a preliminary quantitative assessment of the emotion
 
 ##### **Step A: Annotate each response by usage type**
 
-* During coding, assign each participant response to a theme (e.g., “concept explanation,” “debugging,” “assignment outsourcing”) from your thematic analysis.
+* During coding, assign each participant response to a theme (e.g., “concept explanation,” “debugging,” “assignment outsourcing”) from our thematic analysis.
 * Each theme should also have its SAMR label: enabling vs easing.
 
 ##### **Step B: Sentiment at the theme level**
@@ -152,7 +152,7 @@ This keeps the affective tone tied to **specific AI usage patterns**, which is m
   * Do participants express frustration when using AI for certain tasks?
   * Does sentiment correlate with perceived learning impact?
 
-* For a visual or analytical summary, you could create heatmaps:
+* For a visual or analytical summary, thinking to create heatmaps:
 
   * X-axis: Usage type/theme
   * Y-axis: Sentiment score
@@ -406,7 +406,7 @@ Missing data will be handled via pairwise deletion or multiple imputation; scale
 
 #### **Why This Is Important**
 
-Your qualitative study identified specific usage patterns (e.g., conceptual explanation, summarisation, translation, debugging, assignment completion). The quantitative phase needs to determine:
+Our qualitative study identified specific usage patterns (e.g., conceptual explanation, summarisation, translation, debugging, assignment completion). The quantitative phase needs to determine:
 
 * Which usage patterns are **common enough** to represent institutional trends
 * Which patterns are **emerging behaviours** worth supporting
@@ -420,7 +420,7 @@ This helps universities and AI tool designers prioritise interventions, support,
 * **Moderate prevalence** → suggests context-dependent usage.
 * **Low prevalence** → may mean the behaviour is rare, discipline-specific, or emerges only under special circumstances.
 
-If a theme from Phase 1 shows up rarely in Phase 2, discuss this as:
+If a theme from Phase 1 shows up rarely in Phase 2, we plan to discuss this as:
 
 > “A behaviour observed in qualitative data but not widely generalisable at scale.”
 
@@ -439,7 +439,7 @@ If a theme from Phase 1 shows up rarely in Phase 2, discuss this as:
 
 #### **Why This Is Important**
 
-AI usage behaviours may not be uniformly distributed. Frequency distributions allow you to observe patterns such as:
+AI usage behaviours may not be uniformly distributed. Frequency distributions should allow us to observe patterns such as:
 
 * Heavy-tailed usage (a minority use AI extensively)
 * Bimodal distributions (groups of avoiders vs. enthusiasts)
@@ -463,18 +463,18 @@ $
 * **Bimodal** → students are polarised; large groups either enthusiastically adopt or avoid AI.
 * **Normal distribution** → indicates stable, homogeneous adoption patterns across the population.
 
-This helps you argue whether AI adoption is **diffuse or polarised**.
+This helps the argument of whether AI adoption is **diffuse or polarised**.
 
 ### 1.3) Mean scores for enabling vs. easing behaviours
 
 #### **Why This Is Important**
 
-Your thesis focuses on the distinction between:
+Our thesis will focus on the distinction between:
 
 * **Enabling behaviours** = transformative learning practices
 * **Easing behaviours** = efficiency or shortcut-based uses
 
-Mean scores allow you to quantify *how much* AI is reshaping learning.
+Mean scores help to quantify *how much* AI is reshaping learning.
 
 #### **How to Interpret the Results**
 
@@ -482,7 +482,7 @@ Mean scores allow you to quantify *how much* AI is reshaping learning.
 * **Higher easing score** → AI is primarily used as a substitute or shortcut (aligns with SAMR “Substitution”).
 * **Comparable scores** → mixed uses; AI supports both efficiency and transformation.
 
-This connects directly to your main research question:
+This connects well to the main research question:
 
 > *How is AI reshaping learning practices?*
 
@@ -511,7 +511,7 @@ $
 
 #### **Why This Is Important**
 
-You need to examine whether particular student groups differ in their AI usage:
+We'll examine whether particular student groups differ in their AI usage:
 
 * STEM vs. non-STEM
 * Undergraduates vs. postgraduates
@@ -541,7 +541,7 @@ $
 
 #### **Why This Is Important**
 
-Your conceptual model assumes that factors like AI proficiency, usage style, and perceived outcomes are related. Correlations show:
+The conceptual model constructed assumes that factors like AI proficiency, usage style, and perceived outcomes are related. Correlations show:
 
 * Whether relationships exist
 * Whether these relationships are positive or negative
@@ -553,7 +553,7 @@ Your conceptual model assumes that factors like AI proficiency, usage style, and
 * **Strong negative correlation** (e.g., easing use ↗ and engagement ↘) → surface-level use may be detrimental.
 * **Weak correlation** → behaviours are independent or context-specific.
 
-Correlations support your theorisation of *how AI use reshapes learning*.
+Correlations should further support theorisation of *how AI use reshapes learning*.
 
 **Inputs:** $E_i, P_i, U_{ik}, Y_i$
 
@@ -599,7 +599,7 @@ Factor analysis tests whether the themes from Phase 1:
 * Cluster together in coherent dimensions
 * Represent valid, measurable constructs
 
-This strengthens the legitimacy of your qualitative findings.
+This strengthens the legitimacy of the qualitative findings.
 
 #### **How to Interpret the Results**
 
@@ -615,7 +615,7 @@ This helps bridge qualitative and quantitative insights.
 
 #### **Why This Is Important**
 
-Path modelling allows you to test *causal pathways* implied by your theory:
+Path modelling allows us to test *causal pathways* implied by theory:
 
 * Does AI proficiency lead to more enabling use?
 * Does usage type mediate learning outcomes?
@@ -625,11 +625,11 @@ This produces a theoretically grounded explanation of student behaviour.
 
 #### **How to Interpret the Results**
 
-* **Significant mediated pathways** → support your claim that usage style drives outcomes.
+* **Significant mediated pathways** → support claim that usage style drives outcomes.
 * **Non-significant paths** → challenge assumptions about how AI influences learning.
 * **Good model fit indices** (CFI > 0.90, RMSEA < 0.08) → the theoretical model aligns well with the empirical data.
 
-This ties your entire thesis together by showing how AI reshapes learning in a structured, causal manner.
+This ties the entire thesis together by showing how AI reshapes learning in a structured, causal manner.
 
 ----
 
