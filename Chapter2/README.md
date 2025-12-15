@@ -26,6 +26,28 @@ To examine this question, the study further investigates the following subquesti
 
 Through addressing these questions, this research aims to illuminate the real, rather than presumed, role of generative AI in contemporary university education and to provide evidence-based guidance for institutions, educators, and developers navigating this rapidly changing landscape.
 
+# Preliminary Study
+Here, investigate the adoption of AI tutor at the University of Melbourne. Talk about our effort in first year attempt at COMP90059. Describe
+
+### Study Design
+recruitment strategy - subject coordinator endorsement, training video, personal introduction at tutorials and lectures, tutors reminders
+target population
+compensation - none, volunteer basis, annonymised data
+
+### Technical Report
+Web interface
+Web URL access link and hosting infrastructure
+Weekly tutorial embedding
+Chat area
+
+### AI features
+Socratic tutor
+Progressive hints
+
+### Results
+Low adoption, only 10 sign ups, 162 collected conversation threads, averaged around 3 conversation lengths
+confirmed through chatlogs- reasons for dropoffs include requesting for answers or move on request, denoting frictions 
+
 # Methods
 
 This study adopts a mixed-methods Exploratory Sequential design, integrating qualitative and quantitative research to develop a comprehensive understanding of how university students incorporate generative AI tools into their learning practices. The decision to employ an exploratory design reflects the emerging and understudied nature of day-to-day AI use in higher education. While substantial policy discussions and conceptual debates surround AI in learning, empirical evidence capturing how students actually use AI remains limited. Combining qualitative exploration with quantitative validation therefore enables both openness to new patterns and the ability to evaluate their generalisability across a larger population.
