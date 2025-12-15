@@ -68,13 +68,18 @@ These models have been valuable for assessing perceived usefulness, ease of use,
 
 To address this gap, the present study draws on the Substitution, Augmentation, Modification, and Redefinition (SAMR) framework. SAMR provides a structured way to distinguish between:
 
-* Easing uses: where AI substitutes or automates tasks without changing learning practices, and
+* Easing uses (defined in original study as enhacement): Sub and Augment, where AI substitutes or augements tasks without changing or little change to learning practices, and
 
-* Enabling uses: where AI introduces fundamentally new learning opportunities or transforms how tasks are approached.
+* Enabling uses (defined in original study as transforming) : Mod and Redefine, where AI introduces fundamentally new learning opportunities or transforms how tasks are approached.
 
 SAMR is therefore uniquely suited to evaluating whether AI enhances education in a pedagogically meaningful way or merely accelerates or outsources existing tasks. This distinction is especially relevant given current debates on academic integrity, cognitive offloading, and the risk of over-reliance on AI.
 
 We explicitly use SAMR as "sensitising framework". A sensitising concept helps us notice relevant things without determining what the data must be. This means that SAMR is used to guide question creation, but then analysis are performed inductively without forcing data into a predefined model. After themes emerge, we then apply SAMR deductively for final interpreation. 
+
+The original SAMR by Puentedura (2009, 2020), however, is too narrow and leaves too much room for interpretation, making it hard to accurately code usages to each level. Instead, this study will use (Crompton & Burke, 2020) extended definition for clear differentiation of each level:
+
+<img width="668" height="595" alt="Screenshot 2025-12-15 at 4 10 31 pm" src="https://github.com/user-attachments/assets/8b94a4aa-9f3b-4e34-9e26-4878151177ab" />
+
 
 ### Justification for Exploratory Design 
 
