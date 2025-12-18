@@ -320,12 +320,41 @@ $$
 
 ### 2.4 Annotator Sourcing and Data Collection
 
-Where to source? Mechanical Turk, Online sourcing, or within University
+The reliability of human preference labels is central to validating the LLM Judge. Therefore, we implement a rigorous sourcing strategy focused on domain expertise and high compensation to ensure commitment and quality.
 
-How to collect? Premade UI or self developed
+**Annotator Profile and Recruitment**
 
-Compensation? What is the appropriate rate to encourage genuine responses?
+Annotators will be recruited from a pool of university students currently enrolled in their second year of undergraduate studies or higher. This requirement ensures annotators possess the necessary analytical maturity and foundational domain knowledge to accurately assess the nuanced pedagogical quality of the AI tutor responses.
 
+A minimum of 15 independent annotators will be sourced. Given that the total human validation set contains 500 pairs, each annotator will be assigned approximately 100 data samples, guaranteeing at least three independent judgments per pair, as required by the study design.
+
+**Data Collection Platform and PII Handling**
+
+Annotation will be conducted on a manual web-based platform designed specifically for this study. The platform will enforce the paired-comparison task structure, randomized presentation order to mitigate positional bias, and mandatory completion of a calibration phase before annotating live data.
+
+We will collect the following Personally Identifiable Information (PII) for administrative and verification purposes:
+
+* Name
+
+* Student ID
+
+* Email Address
+
+Crucially, all PII collected will be instantly and permanently deleted from the annotation database immediately after the data collection phase is complete and any clarification questions have been resolved. This protocol ensures compliance with ethical standards, maintaining the anonymity of the human judgments used in the final analysis.
+
+**Compensation and Expected Workload**
+
+The expected workload is approximately one hour per annotator to complete 100 data samples.
+
+To attract high-quality candidates and reinforce the importance of meticulous effort, compensation is set at $50 for one hour of work. This rate is intentionally set well above the standard market rate when compared to large-scale annotation services or platforms like Mechanical Turk, prioritizing data quality over cost efficiency.
+
+**Contingency Plan**
+
+Should the initial recruitment drive fail to secure the required number of annotators or if annotated data is not received by the expected deadline, a contingency plan will be immediately activated:
+
+External Sourcing: Recruitment will be expanded to online marketplaces specializing in academic microtasks, such as Mechanical Turk or Prolific.
+
+Adjusted Compensation: Compensation on these platforms will be adjusted to the prevailing market rate, typically between $20 to $40 for one hour of work, while maintaining the requirement for domain knowledge verification where possible. This ensures the study can meet its data requirements promptly if the initial strategy proves insufficient.
 
 ### 2.5 Human Preference Score
 
