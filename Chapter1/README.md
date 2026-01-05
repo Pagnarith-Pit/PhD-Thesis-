@@ -157,11 +157,7 @@ Each model therefore has two versions:
 
 ### 1. Instruction-Following Modification
 
-Each $M_i^{\text{IF}}$ is trained with:
-
-* Instruction-following dataset: $\mathcal{D}_{\text{IF}}$
-* Chain-of-thought (CoT) augmentation
-* Step-adherence reinforcement signals (if applicable)
+Main research area
 
 ---
 
