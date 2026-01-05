@@ -287,127 +287,15 @@ Phase 2 uses a cross-sectional online survey, administered via Google Forms, all
 
 ### **Instrument**
 
-A survey instrument will be developed based on:
+Instrument has been created and can be found in the Questions.txt. We use Bloom Taxonomy and Self Regular Learning as frameworks to adapt questions from them. The cognitive items in this study were operationalized using the Cognitive Process Dimension of the Revised Bloom’s Taxonomy (Anderson & Krathwohl, 2001). This allows for a clear distinction between Lower-Order Cognition (LOC)—characterized by retrieval and comprehension—and Higher-Order Cognition (HOC)—characterized by the analytical and generative use of AI. This cognitive mapping is complemented by a behavioral assessment grounded in Self-Regulated Learning (SRL) theory (Zimmerman, 2000). To quantify these processes, items were adapted from the Metacognitive Self-Regulation subscale of the Motivated Strategies for Learning Questionnaire (MSLQ; Pintrich et al., 1993). While Bloom’s Taxonomy measures the intellectual depth of the tasks performed with AI, the MSLQ-based items capture the metacognitive agency—the planning, monitoring, and reflection—that students exercise during those interactions.
 
-1. **Themes and usage types identified in Phase 1 thematic analysis**, including:
+Integrating these frameworks is critical for mapping the survey results to the SAMR framework (Puentedura, 2014). It allows the research to differentiate between AI as a tool for mere Substitution (low cognitive depth and high dependency) versus a tool for pedagogical Redefinition (high-order cognition and high metacognitive agency). By using the MSLQ as the psychometric bridge to SRL theory and Bloom’s Taxonomy as the anchor for cognitive complexity, this study ensures that the resulting SAMR classifications are rooted in established educational psychology rather than subjective observation.
 
-   * Concept explanation
-   * Assignment/task support
-   * Brainstorming
-   * Code debugging or walkthroughs
-   * Study planning and organisation
-   * Translation or language clarification
-   * Personal or non-academic use
-
-2. **SAMR-aligned enabling/easing classifications** derived from Phase 1.
-
-3. **Sentiment patterns** identified earlier (e.g., positive, negative, neutral orientation towards AI).
-
-4. **Established constructs** from learning sciences and technology adoption literature, such as:
-
-   * Perceived usefulness
-   * Self-regulated learning behaviours
-   * Cognitive offloading tendencies
-   * Perceived academic integrity risks
-   * AI literacy or proficiency
-
-Items will be primarily Likert scale (1–5), with some categorical and open-ended fields to capture nuanced responses.
+Rationale: This research design is systematically grounded in a dual-framework approach, utilizing Bloom’s Revised Taxonomy and Zimmerman’s Self-Regulated Learning (SRL) model to bridge the gap between cognitive depth and behavioral autonomy. By adapting validated items from the Motivated Strategies for Learning Questionnaire (MSLQ) and Bloom’s cognitive process dimensions, the survey instrument captures not just what tasks students perform with AI, but the metacognitive rigor they apply during the process. To ensure these theoretical constructs are reflected in the actual data, Confirmatory Factor Analysis (CFA) is employed via the semopy library in Python. This stage involves performing factor loading, where we statistically test the relationship between observed survey responses and their underlying latent factors: Lower-Order Cognition (LOC), Higher-Order Cognition (HOC), Metacognitive Agency, and Cognitive Dependency. A high factor loading (typically $>0.6$) confirms that the survey items are robust indicators of their intended constructs.Once these latent factor scores are calculated for each participant, they serve as the empirical "ingredients" for SAMR Mapping. Rather than treating the SAMR (Substitution, Augmentation, Modification, Redefinition) framework as a direct measurement tool, it is used as a post-hoc interpretive lens to classify student profiles. For instance, a profile characterized by high Dependency scores and low Higher-Order Cognition is mapped to Substitution, whereas a profile showing high Metacognitive Agency combined with high-level Bloom tasks (Creating/Evaluating) is classified as Redefinition. This sequential logic—moving from theory-grounded item creation to statistical validation, and finally to pedagogical classification—ensures that the study provides a rigorous, data-driven map of how AI is truly transforming the programming classroom.
 
 ### **Data Collected**
 
 The survey will collect multiple categories of data to support rich quantitative analysis:
-
----
-
-### **1. Demographic and Academic Background**
-
-* Faculty/discipline (STEM, humanities, commerce, health sciences, etc.)
-* Level of study (undergraduate, graduate, PhD)
-* Year level
-* Domestic vs. international status
-* English language proficiency (self-rated)
-* Prior academic performance (self-reported average grade band)
-
-Purpose: To examine how AI usage differs across student groups and educational contexts.
-
----
-
-### **2. AI Familiarity and Usage Profile**
-
-* Frequency of AI use (daily, weekly, monthly)
-* Duration of AI use (in months/years)
-* Self-rated AI proficiency
-* AI tools used (ChatGPT, Gemini, Claude, Copilot, Perplexity, others)
-
-Purpose: Controls for familiarity and exposure.
-
----
-
-### **3. AI Usage Behaviours (Based on Phase 1 Themes)**
-
-Participants will rate how often they use AI for each usage category identified qualitatively, e.g.:
-
-* Explain difficult concepts
-* Summarise lectures or textbooks
-* Translate or simplify text
-* Generate ideas or brainstorm
-* Assist with assignments
-* Debug programming tasks
-* Review writing
-* Organise study plans
-* Provide emotional or motivational support
-* Non-academic personal tasks
-
-Purpose: To quantify usage prevalence and identify usage clusters.
-
----
-
-### **4. SAMR-Aligned Enabling vs. Easing Classification**
-
-For each usage activity, students will be asked:
-
-* Whether AI allowed them to perform a task they *could not do before* (enabling/transformation)
-* Whether AI primarily made the task *faster or easier* (easing/substitution)
-
-Purpose: To measure the degree of pedagogical transformation and evaluate the educational significance of AI use.
-
----
-
-### **5. Perceived Learning Outcomes**
-
-Students will rate:
-
-* Perceived understanding of concepts when using AI
-* Confidence in completing tasks
-* Engagement with course materials
-* Self-reported academic performance changes
-* Over-reliance concerns
-* Perceived risks to academic integrity
-
-Purpose: To link AI use to meaningful learning indicators.
-
----
-
-### **6. Attitudes, Sentiments, and Emotional Orientation**
-
-Based on Phase 1 sentiment patterns, students will respond to items capturing:
-
-* Trust in AI tools
-* Enjoyment or frustration when using AI
-* Anxiety about misuse or errors
-* Overall positivity or negativity toward AI
-
-Purpose: To understand emotional drivers of behaviour.
-
----
-
-### **7. Open-Ended Questions**
-
-A small number of optional open-ended questions will capture nuance, e.g.:
-
-* “Describe a time AI significantly improved your learning.”
-* “Describe a time AI negatively affected your learning or engagement.”
-
 
 ## **Analysis Plan**
 
@@ -649,8 +537,8 @@ Perfect — let’s lay out a **clear, step-by-step analysis pipeline** that sho
 
 1. Lower-order cognition
 2. Higher-order cognition
-3. Learner-oriented engagement (Reflection, Planning, Innovation)
-4. Dependency / Overreliance (reverse-coded)
+3. Agency
+4. Dependency / Overreliance 
 
 * These scores summarize the **student’s cognitive and learning behavior profile**.
 
@@ -665,9 +553,9 @@ Perfect — let’s lay out a **clear, step-by-step analysis pipeline** that sho
 | Pattern                                                      | SAMR Level   |
 | ------------------------------------------------------------ | ------------ |
 | High lower-order cognition + High dependency, low reflection | Substitution |
-| Moderate lower-order + Moderate reflection                   | Augmentation |
-| High higher-order cognition + High reflection                | Modification |
-| High create/innovation + High reflection & planning          | Redefinition |
+| Low Dep + High LOC + High Agency                             | Augmentation |
+| High Agency + High HOC + Moderate Dep                        | Modification |
+| High Agency + High HOC + Low Dep                             | Redefinition |
 
 * Thresholds for “High” can be empirically set (e.g., top 33% of factor scores).
 

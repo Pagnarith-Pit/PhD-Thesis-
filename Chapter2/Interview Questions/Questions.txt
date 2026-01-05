@@ -1,0 +1,58 @@
+Construct 1: Lower-Order Cognition (LOC)
+Rooted in Bloom’s: Remember & Understand
+
+Q1: I use AI to remind myself of the correct syntax for specific programming commands or library functions.
+
+Q2: I ask AI to provide definitions or simple explanations for programming concepts I find confusing.
+
+Q3: I use AI to translate existing code from one programming language to another.
+
+Q4: I ask AI to generate "boilerplate" code or standard templates to save time on setup.
+
+Q5: I use AI to summarize what a block of code is doing in plain, simple English.
+
+Construct 2: Higher-Order Cognition (HOC)
+Rooted in Bloom’s: Analyze, Evaluate, & Create
+
+Q6: I use AI to help me decompose a large, complex programming problem into smaller, logical sub-tasks.
+
+Q7: I ask AI to analyze my logic and identify potential edge cases or bugs I haven't considered.
+
+Q8: I use AI to suggest refactoring strategies to improve the efficiency or readability of my code.
+
+Q9: I use AI to brainstorm different architectural patterns or data structures for a new project.
+
+Q10: I ask AI to evaluate the pros and cons of two different coding approaches for the same problem.
+
+Construct 3: Metacognitive Agency (SRL)
+Rooted in Zimmerman’s SRL & MSLQ: Planning, Monitoring, & Reflection
+
+Q11: Before prompting the AI, I spend time planning the specific logic or pseudocode I want to achieve.
+
+Q12: I cross-check AI-generated code against project requirements or documentation to verify its accuracy.
+
+Q13: I make a conscious effort to understand the "how" and "why" behind an AI’s solution before using it.
+
+Q14: When AI provides a wrong or buggy answer, I use it as an opportunity to analyze and fix the logic myself.
+
+Q15: I intentionally prompt the AI to give me hints or guide me toward a solution rather than giving me the final code.
+
+Construct 4: Cognitive Dependency (Dep)
+Rooted in Risko & Gilbert’s Cognitive Offloading: Reliance & Passivity
+
+Q16: If the AI provides code that runs without errors, I move on without trying to understand how it works.
+
+Q17: I find myself using AI to solve basic coding tasks that I am fully capable of doing on my own.
+
+Q18: I frequently copy and paste AI-generated code directly into my project with little to no modification.
+
+Q19: I feel a sense of frustration or a "mental block" if I have to code without an AI tool available.
+
+Q20: I tend to accept the very first solution the AI provides without exploring alternative or better ways.
+
+Open-ended Questions
+Q21: Can you give an example of a recent situation where AI helped you learn or complete a programming task?
+
+Q22: If AI were unavailable, how would this task or your learning approach change?
+
+Q23: What would your ideal AI tool do to support your learning better than current tools?
