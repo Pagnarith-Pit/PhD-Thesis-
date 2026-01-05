@@ -593,70 +593,140 @@ $
 
 ### **3) Structural and Exploratory Analyses**
 
+Perfect — let’s lay out a **clear, step-by-step analysis pipeline** that shows exactly how your Bloom + learner-oriented survey leads to SAMR-based interpretation. I’ll make it both **methodologically rigorous** and **easy to visualize in a diagram**.
+
 ---
 
-Unlike the formulas above, in this step, we'll be using SmartPLS software for Factor Analysis and SEM modelling.
+### **Full Analysis Pipeline: Bloom + Learner Survey → SAMR Interpretation**
 
-### **3.1) Factor analysis**
+---
 
-**1) When it should be used**
+#### **Step 0: Data Collection**
 
-Treat a SAMR level (Substitution, Augmentation, Modification, Redefinition) as a latent variable only when it is represented by at least 3–4 observed usage themes.
+* Administer the **Bloom + learner-oriented survey** online.
+* Collect **demographics & contextual usage** (frequency, tools, task types).
+* Optional: include **open-ended questions** to triangulate findings with interviews.
 
-This ensures the factor is identifiable, meaning the model can reliably separate the underlying latent construct from random variation.
+---
 
-If a SAMR level has fewer than 3 themes, it should be treated as a simple observed average of the available themes rather than latent.
+#### **Step 1: Data Cleaning & Preparation**
 
-**2) What we are measuring**
+* Remove incomplete responses.
+* Reverse-code dependency/offloading items.
+* Check for outliers or inconsistent responses.
+* Compute descriptive statistics for each item and block.
 
-The latent SAMR construct estimates the true pedagogical impact of AI usage at that level.
+---
 
-It captures the underlying tendency for students’ reported AI activities to align with the intended educational effect (e.g., Substitution = easing existing tasks; Redefinition = enabling new learning opportunities).
+#### **Step 2: Factor Analysis (Measurement Validation)**
 
-This approach compensates for the fact that students may not accurately self-assess the educational significance of each activity — the latent factor aggregates across multiple themes to provide a more robust estimate of impact.
+#### 2a: Exploratory Factor Analysis (EFA)
 
-So when doing factor loading, expect to see 4 factors. Then a valid Phase 1 assignment would mean that all themes assigned to Substitution loads on one factor highly and less on others. 
+* Purpose: Check whether items cluster as expected.
 
+* Expected clusters:
 
-#### **Why This Is Important**
+  1. **Lower-order cognitive engagement**: Remember, Understand, Apply
+  2. **Higher-order cognitive engagement**: Analyze, Evaluate, Create
+  3. **Learner-oriented / Self-regulated learning**: Reflection, Planning, Innovation, Self-efficacy
+  4. **Dependency / Overreliance** (reverse-coded)
 
-Factor analysis tests whether the themes from Phase 1:
+* Retain items that load cleanly onto factors (loading > 0.4)
 
-* Are statistically real
-* Cluster together in coherent dimensions
-* Represent valid, measurable constructs
+* Check factor reliability (Cronbach’s α ≥ 0.7 per factor)
 
-This strengthens the legitimacy of the qualitative findings.
+#### 2b: Confirmatory Factor Analysis (CFA)
 
-#### **How to Interpret the Results**
+* Confirm EFA structure
+* Obtain **factor scores** for each respondent (needed for SAMR mapping)
+* Validate model fit: CFI, TLI > 0.9; RMSEA < 0.08
 
-* **Loadings > 0.40** → strong association with the factor
-* **Clear factor structure** → Phase 1 themes are valid
-* **Cross-loadings** → behaviours may overlap
-* **Poor structure** → themes may require reconceptualisation
+---
 
-This helps bridge qualitative and quantitative insights.
+#### **Step 3: Compute Factor Scores**
 
-### **3.2) Path models (SEM)**
+* Each respondent gets **continuous factor scores** for:
 
+1. Lower-order cognition
+2. Higher-order cognition
+3. Learner-oriented engagement (Reflection, Planning, Innovation)
+4. Dependency / Overreliance (reverse-coded)
 
-#### **Why This Is Important**
+* These scores summarize the **student’s cognitive and learning behavior profile**.
 
-Path modelling allows us to test *causal pathways* implied by theory:
+---
 
-* Does AI proficiency lead to more enabling use?
-* Does usage type mediate learning outcomes?
-* Does discipline influence outcomes through usage patterns?
+#### **Step 4: Map Configurations to SAMR Levels**
 
-This produces a theoretically grounded explanation of student behaviour.
+* Use **rule-based or clustering approach**:
 
-#### **How to Interpret the Results**
+#### Option A: Rule-Based
 
-* **Significant mediated pathways** → support claim that usage style drives outcomes.
-* **Non-significant paths** → challenge assumptions about how AI influences learning.
-* **Good model fit indices** (CFI > 0.90, RMSEA < 0.08) → the theoretical model aligns well with the empirical data.
+| Pattern                                                      | SAMR Level   |
+| ------------------------------------------------------------ | ------------ |
+| High lower-order cognition + High dependency, low reflection | Substitution |
+| Moderate lower-order + Moderate reflection                   | Augmentation |
+| High higher-order cognition + High reflection                | Modification |
+| High create/innovation + High reflection & planning          | Redefinition |
 
-This ties the entire thesis together by showing how AI reshapes learning in a structured, causal manner.
+* Thresholds for “High” can be empirically set (e.g., top 33% of factor scores).
+
+#### Option B: Clustering
+
+* Use k-means or hierarchical clustering on factor scores
+* Identify **clusters of students with similar engagement patterns**
+* Map clusters to SAMR levels **post-hoc**, based on cognitive + learner-oriented profiles
+
+---
+
+#### **Step 5: Descriptive & Inferential Analysis**
+
+* **Descriptive:**
+
+  * % of students showing each SAMR-level pattern
+  * Average factor scores per task type
+  * Tool usage patterns per SAMR level
+
+* **Inferential:**
+
+  * Correlation between learner orientation factors and cognitive engagement
+  * Predictive models (optional): which factors predict “Redefinition” patterns
+  * Compare subgroups (e.g., undergraduate vs. postgraduate)
+
+---
+
+#### **Step 6: Triangulation with Interview Phase**
+
+* Compare **survey-identified SAMR patterns** with **Phase 1 qualitative findings**
+* Examples:
+
+  * Interview: “I use AI to explore new approaches I wouldn’t have tried”
+  * Survey: High Create + High Innovation → Redefinition
+* Strengthens **construct validity** and shows sequential exploratory logic.
+
+---
+
+#### **Step 7: Interpretation & Reporting**
+
+* Report **factor structure**, reliability, and descriptive statistics first
+* Then interpret **SAMR patterns emergent from configurations**
+* Include **visualizations**: heatmaps, radar charts, or Sankey diagrams showing Bloom + learner factors → SAMR levels
+
+---
+
+#### **Step 8: Optional Extensions**
+
+* Link SAMR patterns to **learning outcomes or performance measures** (if available)
+* Analyze **tool preferences** or frequency as predictors of SAMR-level engagement
+
+---
+
+### Key Points
+
+* **SAMR is never a direct survey factor** — it is **derived post-hoc** from factor score configurations
+* Factor analysis ensures your survey is **psychometrically sound**
+* This pipeline maintains **sequential exploratory design**:
+  Interview → Survey → CFA → Factor scores → Pattern → SAMR interpretation
 
 ----
 
