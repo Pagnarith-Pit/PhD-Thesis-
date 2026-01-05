@@ -730,11 +730,112 @@ Perfect — let’s lay out a **clear, step-by-step analysis pipeline** that sho
 
 ----
 
+# Connecting the Interview to the Survey 
+
 Together, these analyses determine:
 
 * Whether Phase 1 themes hold statistically
 * Which AI practices carry genuine educational value
 * Where risks (over-reliance, shallow learning) are concentrated
 * How different student populations interact with AI
+
+## 1. How the survey *emerges from the interviews*
+
+Interviews focused on:
+
+* What tasks students use AI for (code explanation, debugging, learning concepts, etc.)
+* How they use AI (prompting, reflection, integration into learning)
+* Perceived impact (confidence, understanding, speed, engagement)
+* Preferences (Socratic tutor vs. answer-giving chatbot)
+
+These discussions will give:
+
+1. **Task categories** → what students actually use AI for
+2. **Cognitive processes** → whether they are understanding, applying, analyzing, or creating
+3. **Learning behavior patterns** → reflection, reliance, innovation, or overreliance
+
+The **survey blocks** directly map to these insights:
+
+| Interview Insight                                                    | Survey Operationalization                   |
+| -------------------------------------------------------------------- | ------------------------------------------- |
+| Students use AI to **remember code patterns, syntax, definitions**   | Bloom → Remember                            |
+| Students use AI to **understand concepts or code they didn’t write** | Bloom → Understand                          |
+| Students use AI to **debug, analyze errors, or improve logic**       | Bloom → Analyze / Evaluate                  |
+| Students use AI to **generate new solutions or code creatively**     | Bloom → Create                              |
+| Students **reflect on AI’s suggestions or adapt them**               | Learner-oriented → Reflection, Planning     |
+| Students **rely on AI without thinking**                             | Learner-oriented → Dependency / Offloading  |
+| Students **try new approaches encouraged by AI**                     | Learner-oriented → Innovation / Exploration |
+
+The **interviews give the “content” and patterns**, Bloom + learner-oriented constructs give a **structured measurement tool**.
+
+---
+
+## 2. How to do this rigorously in your thesis
+
+1. **Code interview responses** using thematic analysis:
+
+   * E.g., “AI used to debug” → Code: *Analyze*
+   * “AI suggested approach, I tried new things” → Code: *Create / Innovation*
+     
+2. **Aggregate these codes into themes** that naturally correspond to Bloom levels.
+3. **Design survey items to reflect these themes**, preserving participants’ language as much as possible.
+
+This preserves the **emergent nature** of sequential design — survey items are not arbitrarily chosen; they are **operationalizations of qualitative findings**.
+
+---
+
+## 3. Example of Direct Linking
+
+**Interview excerpt:**
+
+> “I usually ask ChatGPT to explain a function I don’t understand. Sometimes it gives me examples, and I can see why it works.”
+
+**Coding:**
+
+* Cognitive: Understand
+* Behavior: Reflection on AI explanation
+
+**Survey translation:**
+
+* Bloom: “I use AI to explain concepts or code I don’t fully understand.”
+* Learner-oriented: “After using AI, I reflect on what I learned and what I still need to understand.”
+
+**survey item is directly grounded in student words**, preserving qualitative findings.
+
+---
+
+## 4. Why This Strengthens Your Study
+
+* Maintains **exploratory sequential logic**:
+  Phase 1 → inductive understanding → Phase 2 → structured measurement
+* Avoids **forcing theoretical frameworks** onto students’ experiences
+* Ensures **construct validity**: survey measures what students actually do, not what we assume
+
+Essentially doing **thematic translation from interview → survey**: the survey *quantifies the patterns that emerged in Phase 1*.
+
+---
+
+## 5. Adding a “traceability table” in presentation
+
+Include a table in your thesis showing:
+
+| Interview Theme       | Example Quote                                    | Bloom / Learner-Item Mapping | Survey Item ID |
+| --------------------- | ------------------------------------------------ | ---------------------------- | -------------- |
+| Debugging             | “I ask AI when my code throws an error”          | Analyze                      | A4             |
+| Concept Understanding | “AI explains loops I struggle with”              | Understand                   | A2             |
+| Creative Use          | “I ask AI to generate new solution approaches”   | Create / Innovation          | A6 / B6        |
+| Reflection            | “I check whether the AI explanation makes sense” | Reflection                   | B3             |
+
+This **explicitly demonstrates the survey is grounded in qualitative data**
+
+---
+
+### Takeaway
+
+survey items are **derived directly from them**, translated into **Bloom + learner-oriented constructs** for measurement.
+* SAMR remains the **interpretive lens**, not the measurement tool.
+* This keeps the **exploratory sequential design intact**: qualitative → quantitative → interpretation.
+
+
 
 
