@@ -481,8 +481,6 @@ $
 
 ### **3) Structural and Exploratory Analyses**
 
-Perfect — let’s lay out a **clear, step-by-step analysis pipeline** that shows exactly how your Bloom + learner-oriented survey leads to SAMR-based interpretation. I’ll make it both **methodologically rigorous** and **easy to visualize in a diagram**.
-
 ---
 
 ### **Full Analysis Pipeline: Bloom + Learner Survey → SAMR Interpretation**
