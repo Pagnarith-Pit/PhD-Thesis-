@@ -130,10 +130,45 @@ Interviews will be audio-recorded with participants’ consent. Transcription wi
 ---
 
 ### Participants
-Participants will be active undergraduate or postgraduate students at the University of Melbourne. Because interviews are conducted in English, participants must demonstrate adequate English proficiency. To ensure relevance, students must have used generative AI at least once in the past six months.
+Participants will be active undergraduate or postgraduate students at the University of Melbourne. 
 
-The study will aim for approximately 40 participants or until thematic saturation is reached. This sample size is consistent with exploratory qualitative research where the goal is to map the space of behaviours rather than achieve statistical proportionality.
+**Variables of Interests**:
+* Primary Language: English or Others
+* Year Level: 1,2,3,4 or above
+* Degree Level: Undergrad or Postgrad
+* Programming Experience Level: Beginner, Intermediate, or Advanced
 
+**Inclusion Criteria**:
+No restrictions will be placed on age, residency status, or academic standing.
+
+1) English Proficiency: Since the interview will be conducted in English, students must have sufficiently proficient English skill to understand the project aim and requirements, not only to provide insightful responses but also for informed consent.
+
+2) Recent AI Usage For Learning: Students must have used AI as part of their programming learning for the past 6 months. This ensures that their experience and consequently their responses remain recent and relevant. 
+
+3) Programming Course Requirement: Participants must be currently enrolled in at least one programming-focused subject. For the purpose of this study, a programming-focused subject is defined as a course whose primary learning outcomes involve learning to write, understand, or debug computer programs, including at least one of the following core areas:
+
+* Programming fundamentals (e.g., variables, control flow, functions, data structures)
+* General-purpose programming languages (e.g., Python, Java, C/C++)
+* Software development principles (e.g., version control, testing, debugging, modular design)
+* Databases and data processing (e.g., SQL, data manipulation, data pipelines), where programming constitutes a core assessed component
+
+The subject must involve substantial hands-on programming tasks or assessments, rather than solely conceptual or theoretical content.
+
+**Exclusion Criteria**: 
+1) Specialised or Domain-Specific Programming Subjects: To constrain the scope of the study and reduce heterogeneity in learning contexts, students enrolled exclusively in specialised programming subjects will be excluded.
+
+Specialised programming subjects are defined as courses where programming is primarily taught as a tool for a specific application domain, rather than as a general programming skill. Examples include, but are not limited to:
+
+* Machine learning or artificial intelligence courses
+* Programming for business or finance
+* Bioinformatics or computational biology
+* Domain-specific engineering programming courses
+
+Students enrolled in both general programming subjects and specialised programming subjects may still be included, provided they meet the programming course requirement defined above.
+
+--- 
+
+### Recruitment
 Recruitment will occur through:
 
 * Flyers posted around campus
@@ -254,7 +289,6 @@ The target population mirrors that of Phase 1 but expands its scope to achieve s
 Participants will include:
 
 * Undergraduate and graduate students enrolled at the University of Melbourne.
-* Students from all faculties (STEM and non-STEM) to capture disciplinary variation in AI use.
 * Students who have used generative AI tools (e.g., ChatGPT, Claude, Gemini, GitHub Copilot) within the past six months, ensuring responses reflect current habits and not outdated behaviours.
 
 No restrictions will be placed on age, residency status, or academic standing.
@@ -265,7 +299,6 @@ The study aims to recruit **at least 300 participants**.
 This sample size is chosen to:
 
 * Enable stable estimation for multivariate analyses (e.g., regression, cluster analysis).
-* Provide statistical confidence when comparing subgroups (e.g., STEM vs non-STEM; novice vs expert AI users).
 * Ensure adequate representation of diverse AI usage patterns identified in Phase 1.
 
 ### **Recruitment**
@@ -428,10 +461,10 @@ $
 
 We'll examine whether particular student groups differ in their AI usage:
 
-* STEM vs. non-STEM
 * Undergraduates vs. postgraduates
-* Domestic vs. international students
+* Language: English vs Others
 * High-AI-proficiency vs. low-proficiency users
+* Programming Experience Level (Year Level or Course Level)
 
 This helps identify **who benefits most** and where targeted support may be necessary.
 
