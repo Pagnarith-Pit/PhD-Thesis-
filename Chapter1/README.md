@@ -256,7 +256,53 @@ $$
 
 
 ## 2. Human Evaluation with Stratified Sampling
-We want established ground truth label from actual students, but to ensure robustness of the result, we want to have at least 3 annotators so we can filter out any noise of a single annotator. The minimum is 3 to break ties.
+We want established ground truth label from actual tutors, but to ensure robustness of the result, we want to have at least 3 annotators so we can filter out any noise of a single annotator. The minimum is 3 to break ties.
+
+The tutors can be recruited from the following subjects:
+**Undergrad Subjects**
+1.	COMP10001: Foundations of Computing
+•	Summer: bin.chen@unimelb.edu.au
+•	Semester 1: comp10001-semester1@unimelb.edu.au
+
+2.	COMP10002: Foundations of Algorithms
+•	Semester 1: cohneys@unimelb.edu.au
+
+3.	COMP10003: Media Computation
+•	Semester 1: greg.wadley@unimelb.edu.au, wsmith@unimelb.edu.au
+
+4.	COMP20003: Algorithms and Data Structures
+•	Only Semester 2: nir.lipovetzky@unimelb.edu.au, lkulik@unimelb.edu.au
+
+5.	COMP20005: Introduction to Numerical Computation
+•	Semester 1: ammoffat@unimelb.edu.au
+
+6.	COMP20007: Design of Algorithms 
+•	Semester 1: tawfiqul.islam@unimelb.edu.au
+
+7.	COMP20008: Elements of Data Processing
+•	Semester 1: caren.han@unimelb.edu.au
+
+8.	SWEN20003: Object Oriented Software Development
+•	Semester 1: andrew.valentine@unimelb.edu.au
+
+9.	INFO20003: Database Systems
+•	Semester 1: dalfonso@unimelb.edu.au
+
+**Postgrad Subjects**
+1.	COMP90038: Algorithms and Complexity
+•	Semester 1: junhao.gan@unimelb.edu.au
+
+2.	COMP90041: Programming and Software Development
+•	Semester 1: amani.abusafia@unimelb.edu.au
+
+3.	COMP90048: Declarative Programming
+•	Only Semester 2: christine.rizkallah@unimelb.edu.au
+
+4.	COMP90059: Introduction to Programming
+•	Semester 1: warda.syeda@unimelb.edu.au, karoly.p@unimelb.edu.au
+
+5.	INFO90002: Database Systems & Data Modelling
+•	Semester 1: lindent@unimelb.edu.au
 
 However, annotating the entire dataset 3 folds would require extensive time and too much resources. Instead, we do this in two steps, human annotation on samples, then use LLM as a Judge to complete the rest. 
 
@@ -338,7 +384,7 @@ We will collect the following Personally Identifiable Information (PII) for admi
 
 * Name
 
-* Student ID
+* Student/Staff ID
 
 * Email Address
 
