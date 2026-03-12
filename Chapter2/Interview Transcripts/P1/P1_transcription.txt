@@ -1,0 +1,147 @@
+[00:00:00] Speaker 1: Um, okay. Uh, we'll go through...
+
+Speaker 2: I'll just go turn on the air conditioner.
+
+Speaker 1: Okay, sure thing. I'll get the form up. Um... and I'll send this to you after as well to just make sure that, um, nothing has been changed into it. So, uh, essentially there will be three major components here. The first one will be that you agree to this interview and that it will only be recorded with your consent, which, uh, you've agreed to. Uh, that the recording will be transcribed into text using some sort of programs like Zoom or OpenAI Whisper and, uh, that you allow for that to happen. And the other one would be that your data will be securely stored within the University of Melbourne and that it could be used for, uh, publications and, uh, analysis and future research in the same general area.
+[00:01:00] Speaker 2: Okay, yeah. I consent.
+
+Speaker 1: Awesome. Perfect. Okay. So, um, we'll go back to our thing here. And then, uh, with all of that out of the way, uh, we'll just start up with sort of a, uh, a warm-up question just for me to understand, uh, you as an individual a bit better. Uh, could you tell me if you're an undergraduate or a postgraduate student?
+
+Speaker 2: I'm an undergraduate student.
+
+Speaker 1: And what year of study are you currently in right now?
+
+Speaker 2: Uh, I'm in my first year, but I do have, uh, I did have a gap year that I took in my country in which I studied computer science.
+
+Speaker 1: Awesome. Um, we'll get to that in just a tiny bit. Um, but, uh, would you say that English is your first language?
+
+Speaker 2: No.
+
+Speaker 1: Mm-hm. Uh, so, uh, what language, uh, would you primarily speak?
+
+Speaker 2: Uh, I would say I'm very good at English, but my primary language is Arabic.
+[00:02:12] Speaker 1: Arabic. Perfect. And then, um, uh, we'll also have questions about your general AI, uh, tools. Uh, could you give me examples of like a couple of these kind of, uh, you know, chatbots or what have you, some examples that you would usually frequently use as your day-to-day?
+
+Speaker 2: Uh, mainly just ChatGPT and Gemini.
+
+Speaker 1: Um, no other things like, you know, Grammarly or Loveable or anything like that?
+
+Speaker 2: Oh, uh, I didn't know those counted. I guess Grammarly sometimes.
+
+Speaker 1: Sure. Yeah, that those wouldn't typically be the AI that you think of, but yeah, uh, just wanted to cover all grounds. And how often would you say that, you know, when you're studying, how often do you say that, uh, you use AI along with your materials?
+
+Speaker 2: Um, I would say every day to every two days, like during my studying time, not my normal time.
+[00:03:30] Speaker 1: Mm-hm. And you mentioned that you had programming education before, uh, during the gap year, but um, do you do, uh, do you also have like professional experience or any sort of internships or any work that you've done, even side projects, any work that are not sort of, uh, related to the prior education that you have?
+
+Speaker 2: No, it's all purely academic.
+
+Speaker 1: Okay. Uh, lovely. And with that, we'll be able to get to our main one. Uh, this would be, you know, where we would have quite a bit of focus on. And I just want to, you know, understand from your perspective as you go along studying programming and, you know, COMP10001, for example, what kind of task would you say that you generally seek help from AI the most for?
+
+Speaker 2: Um, is this in terms of programming?
+
+Speaker 1: Um, yes. So, I guess so. Or you could give me other examples if you'd like, um...
+
+Speaker 2: Uh, I mean the question is too general that way. Uh, but for programming, I'd say, um, the best use I get of AI is finding my mistakes in coding. Because sometimes the error message is a little vague and it's a hassle to debug the code and find the error. So just giving it to the AI is, I think, uh, the best use I ever get of AI.
+[00:05:05] Speaker 1: Awesome. I mean, uh, yeah, apologies for the sort of setting it up as a bit too vague. But, uh, could you walk me through, uh, that typical process? Um, do you attempt the question first? Do you put it all in, get the results, have a bug? Talk me through how, you know, how that process goes of using AI as like a debugger.
+
+Speaker 2: Uh, so let's say I want to finish a certain task, uh, and I write the code to, uh, what I believe to be, you know, in a correct manner and then there is an error. Or it's not producing the expected result. Uh, and of course the latter scenario is worse because there's no, you could argue there's no mistake in the syntax, it's just a mistake in the logic. And so you would have to follow through all where the code goes and that can be extremely tedious. And so for these kinds of scenarios, I'd rather just, uh, copy the, uh, code and then give it to the AI and tell it, "I'm expecting this result. Why is it giving me this result?" And then it might give me a reason. But of course it doesn't always work because it's AI.
+[00:06:30] Speaker 1: Sure. Yeah, completely understand where you're coming from. I mean those logic errors drive me nuts. Um, so, you know, just sort of taking a step back, like thinking if, you know, if you were to do the task without AI, you know, have you sort of, um, done work on debugging or trying to find the logical flaws in the code without, you know, going to these kind of tools?
+
+Speaker 2: Yeah, for sure. I mean when it, when it fails, of course. But, uh, sometimes when I'm in class, in my gap year, I did have a teacher. I might, uh, find it easy to talk to the teacher, but when the code is too complex, I would have to explain to the teacher what I'm trying to do. And so in that case, I'd rather just avoid that, uh, interaction altogether because I don't want to overwhelm the teacher. So I would go with AI in that case.
+[00:07:25] Speaker 1: Yeah, uh, lovely. I mean, you know, uh, sounds very clear to me, but I just want to sort of to get it from, you know, your own description. Um, you know, what value does AI add over these sort of, um, previous methods, let's say talking to a tutor or, you know, Googling the solutions or what have you? Your previous attempts at, uh, doing these certain tasks, what kind of value does AI really add over top of that?
+
+Speaker 2: Um, I'm not sure I fully understand the question. What value does AI give me that I wouldn't get over or using normal methods? Is that the question?
+
+Speaker 1: Exactly, exactly. Yep. Thank you for the feedback there too. Yep. That's essentially the question, yeah.
+
+Speaker 2: Uh, I would say, uh, when it comes to asking teachers or even my peers, you kind of have this, uh, credits system kind of of where if where you cannot ask too many questions because otherwise you're annoying. But AI, all that's going to happen is it's going to tell you to come back in 24 hours when the, you know what I'm talking about, the thing, the free version ended or whatever.
+
+Speaker 1: Mm-hm, mm-hm.
+
+Speaker 2: So yeah, basically AI never gets tired, but humans do.
+[00:08:51] Speaker 1: Mm-hm. And, um, you know, so again from your perspective, how much do you see yourself relying on AI for these kind of tasks? Would you say you'd be able to accomplish that sort of same level without the assistance?
+
+Speaker 2: Um, without AI assistance... I would probably need to spend more time. I believe in myself enough that I can do it. I believe AI is simply a tool, it's not, uh, it's not like something I'm hanging on. It's just an assistance tool, but it does, it helps save time which would allow me to study more. So I would say it does help me more a little bit, but nothing that I cannot do with teachers or by spending more time and being more dedicated.
+
+Speaker 1: Mm-hm, mm-hm. Um, so again just so sort of understand you probably it's it's mainly sort of the ease and the speed that AI gives to you. It's not necessarily like, um, revolutionary or anything like that. Do I, do I get that sort of correct from your description?
+[00:10:07] Speaker 2: Uh, not really. I would say, I didn't mention this, it's my fault, but I would say also another aspect that AI excels in is explaining every nitty-gritty detail about, uh, anything, which of course includes coding, which would help, uh, deepen your understanding. Like especially with, uh, crazy languages like JavaScript, it doesn't make sense, but I think with AI you can kind of make sense of it.
+
+Speaker 1: Um, that's sort of a lovely way to get to the next one, I guess, would be, you know, like if we were to remove AI from the picture altogether. You've mentioned it a bit, but then from here I want to dig down a bit deeper. How would you say the quality of your study change?
+
+Speaker 2: Uh, it would go down drastically. Uh, it's like you telling me, uh, how would your study life be like if you had no Wi-Fi? I mean, you people did it before, but it was painful. And I, I will choke a lot probably. That's all.
+[00:11:23] Speaker 1: Right, right. So certainly it has become a very important component, you know, for your, uh, day-to-day learning, you would say.
+
+Speaker 2: Yeah, it's, it's become a reflex to just, uh, ChatGPT something if you don't know it instead of Googling it.
+
+Speaker 1: Right. And so has that then, you know, through the usage of these tools, has it changed your approach to programming tasks at all?
+
+Speaker 2: Um, it's hard to say if it's changed because by the time I started coding, AI was already a thing. So I don't know what it's like without AI kind of.
+
+Speaker 1: Right. Uh, I mean certainly, uh, you know, there are some let's say scenarios where AI can't do the task, like you were mentioning sometimes it would fail, uh, at the, at its job of like being able to provide the correct answer. So, so I just want to see the comparison between, you know, how you would solve a problem when, um, you have access to AI versus when you wouldn't have access to it.
+
+Speaker 2: Well, the sad answer is that I did not solve the problem, I just gave up.
+
+Speaker 1: Okay, gotcha. Yeah. That's perfect. That's perfectly fine. Um, and again you mentioned a bit earlier as well of how, you know, AI's very good at explaining certain concept and digging it down into it. And so, you know, do you feel like AI has affected your the depth of your understanding in programming concepts?
+[00:13:05] Speaker 2: Um, it's hard to say. It's been like more than a year since last I've learned something new in programming. But in general, I would say yes, although I cannot think of specific examples.
+
+Speaker 1: That's okay. Um, so I mean, let me then open that up a bit then. Um, you know, again for your education, uh, could you give me a scenario where it has been most helpful for you?
+
+Speaker 2: Um, as I said earlier, it's mostly just finding errors in in the code and explaining what what was the reason of those errors.
+
+Speaker 1: So, um, I mean at this point I'd like to, um, flip the coin over a little bit, you know, um, and see how you seek other supports as well. Um, but I want I do want to understand, uh, you know, the your preferences. Uh, are there times where you would prefer, uh, going to AI over, you know, the traditional supports like your tutors or your classmate or peers?
+
+Speaker 2: Um, it's really just about convenience. Uh, if I'm in class and we're just learning about something and I don't understand this thing and the tutor is free, I would ask the tutor. But otherwise, uh, if he's not free or, uh, if it's an online class, they're not in front of me, I would I would go with AI.
+[00:14:46] Speaker 1: Um, so just based on, you know, your personal preference, uh, in general, where would you sort of put that in terms of like rankings if you were to have like the number one source that you would go to first and then if that's not available the second, where would you put AI and, you know, all other resources like the internet, your tutors and stuff? Where would where would AI land on that ladder?
+
+Speaker 2: Um, since, um, right now I'm an undergraduate student, I most of the time I need to follow certain rules while programming. It's not about just getting the task done, I need to also like make sure I only use, uh, available methods and stuff. Uh, usually the first thing I would go to or if available, I would go with tutors, then peers, then AI, and then the internet, I guess.
+
+Speaker 1: Right. Okay. Very interesting. Yeah. Um, mm-hm. And so, you know, um, this this might not be quite relevant based on your, uh, earlier description, but I I do have to ask, you know, has the availability of AI and the convenience that it offers, has that somehow influenced, uh, your help-seeking behaviors? Do you, you know, do you seek help less from the tutors? Would it be just the same either way? Uh, how would you say that has affected that?
+
+Speaker 2: Well, it does answer questions and I come for it first because of convenience. So yeah, it does mean that I seek help from tutors less.
+[00:16:29] Speaker 1: Mm-hm. Um, so then, you know, are there situations where you wouldn't use it, where you would deliberately avoid, um, AI assistance at all?
+
+Speaker 2: Um, I don't see such a scenario.
+
+Speaker 1: Right. Um, so then would you, uh, describe that AI has been able to meet your learning needs, at least so far?
+
+Speaker 2: Yeah, definitely.
+
+Speaker 1: Mm. Um, I mean, uh, I do want to understand just a tiny bit more on that area as we wrap up here. Um, do you see that there are effectively an alternatives to this? You know, like again we've touched a little bit on like the failure of AI, um, in meeting your needs, which you said it's it's very minimal, but um, are there, you know, better alternatives out there that you do go for on some task and and not the other?
+
+Speaker 2: Uh, better better alternatives like better than AI?
+
+Speaker 1: Mm, for for certain tasks or certain problems.
+
+Speaker 2: Uh, if a task is provided to me via university, I would I would assume that tutors are the best, uh, source. Uh, but that that has not happened yet.
+
+Speaker 1: Mm. Okay.
+
+Speaker 2: I'm still in the very beginning of my computer science or foundation of computing class. That's why.
+[00:18:12] Speaker 1: Mm-hm. Um, you know, just sort of take me back, you know, as you had your, uh, academic experience before, as you've done, uh, certain classes before and, uh, now starting COMP10001, um, if you were to build a perfect tool, uh, for your learning, if, uh, you know, that the current AI tools out there currently can't do, what would that ideal tool look like?
+
+Speaker 2: Um, it would probably be made from the university because it it would follow the rules of the university, like only providing the functions that you're supposed to know. Uh, but and also of course not just, uh, giving you the answer right away. Uh, but otherwise like that's pretty much something that we already have, you know, except it sometimes gives you methods that you're not supposed to know.
+
+Speaker 1: Mm-hm. Like with ChatGPTs and everything like that, you mean?
+
+Speaker 2: Yeah, sometimes they give you methods that you're not supposed to know or not supposed to use in class. Uh, I'm just saying if there was a version of ChatGPT that was made by the university that did everything but, you know, had some regulations that people didn't break, uh, that would that would be the optimal, uh, learning tool, I would say.
+[00:19:44] Speaker 1: Yeah, awesome. Um, yeah, thank you, you know, again for your time. And, uh, just as we are wrapping up here, um, are there other informations that we haven't covered that you think might be important to the conversation, uh, you know, for me to to take on?
+
+Speaker 2: Uh, no, I think we covered everything.
+
+Speaker 1: Yep. Okay. Uh, perfect. Uh, then, uh, uh, uh, I'd just like to reiterate that, uh, everything we say here will be super confidential, that, um, and that, you know, at any point if, uh, you feel, uh, that you would like to withdraw your, uh, consent or you want the data removed, uh, just give me an email and that will be taken care of, uh, very, very quickly. Uh, lovely. Uh, I'll I'll be able to provide you an update with the, uh, outcomes if you'd like, uh, uh, so do reach out to me if you have any questions or anything like that.
+
+Speaker 2: Mm-hm.
+
+Speaker 1: Awesome. Thank you so much for your time, uh, Hassan. Oh, and, um, I'll send your your gift card through your emails. Yep. If there's any, uh, is that is that a problem?
+
+Speaker 2: Uh, no, no. I just thought I didn't deserve it because I let you wait for like 10 minutes.
+
+Speaker 1: No, that's that's alright. I mean, that's that's okay. I mean, I'm I'm happy enough that you spend your time here anyway. So, um, if there's because there's a bit of an issue with the, uh, university's, uh, corporate credit card, uh, corporate, uh, gift card system at the moment, so if there's any issues, I'll pop into the lecture and just hand it you a $20 bill. I hope that's okay with you.
+
+Speaker 2: Oh, yeah, yeah. That's okay.
+
+Speaker 1: Cool. Awesome. Thank you so much.
+
+Speaker 2: All right. Bye-bye.
+
+Speaker 1: Bye-bye.
